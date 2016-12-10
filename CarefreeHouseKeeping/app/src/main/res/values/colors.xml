@@ -3,4 +3,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="zw_white">#fff</color>
+    <color name="zw_yellow">#F8F661</color>
+    <color name="zw_green">#99D9F4</color>
+    <color name="zw_deep_green">#1598CE</color>
+    <color name="txt_1">#1598CE</color>
+    <color name="txt_2">#94C8DD</color>
+    <color name="txt_3">#999696</color>
 </resources>
