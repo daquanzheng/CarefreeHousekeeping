@@ -75,13 +75,22 @@ public class HomeMainActivity extends FragmentActivity{
                 switch (checkedId){
                     case R.id.home_page:
                         viewPager.setCurrentItem(0);
+                        homePage.setTextColor(getResources().getColor(R.color.yellow));
+                        homeOrder.setTextColor(getResources().getColor(R.color.white));
+                        homeMine.setTextColor(getResources().getColor(R.color.white));
                         break;
-//                    case R.id.home_order:
+                    case R.id.home_order:
 //                        viewPager.setCurrentItem(1);
-//                        break;
-//                    case R.id.home_mine:
+                        homePage.setTextColor(getResources().getColor(R.color.white));
+                        homeOrder.setTextColor(getResources().getColor(R.color.yellow));
+                        homeMine.setTextColor(getResources().getColor(R.color.white));
+                        break;
+                    case R.id.home_mine:
 //                        viewPager.setCurrentItem(2);
-//                        break;
+                        homePage.setTextColor(getResources().getColor(R.color.white));
+                        homeOrder.setTextColor(getResources().getColor(R.color.white));
+                        homeMine.setTextColor(getResources().getColor(R.color.yellow));
+                        break;
                 }
             }
         });
