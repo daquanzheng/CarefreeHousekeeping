@@ -1,15 +1,13 @@
-package micro.com.carefreehousekeeping.Activity;
+package com.micro.android316.housekeeping;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import micro.com.carefreehousekeeping.R;
-
-public class HomeActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_main);
     }
 }
