@@ -1,4 +1,4 @@
-package micro.com.carefreehousekeeping;
+package com.micro.android316.housekeeping;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

@@ -5,7 +5,7 @@ android {
     buildToolsVersion "24.0.2"
 
     defaultConfig {
-        applicationId "micro.com.carefreehousekeeping"
+        applicationId "com.micro.android316.housekeeping"
         minSdkVersion 23
         targetSdkVersion 24
         versionCode 1

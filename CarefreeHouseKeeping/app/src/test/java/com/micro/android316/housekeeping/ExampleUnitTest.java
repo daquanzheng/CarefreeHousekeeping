@@ -1,4 +1,4 @@
-package micro.com.carefreehousekeeping;
+package com.micro.android316.housekeeping;
 
 import org.junit.Test;
 
