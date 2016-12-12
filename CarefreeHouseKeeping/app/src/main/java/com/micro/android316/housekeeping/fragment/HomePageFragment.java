@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.RadioGroup;
 
 import com.micro.android316.housekeeping.R;
 import com.micro.android316.housekeeping.adapter.HomePageAdapter;
@@ -27,10 +26,12 @@ public class HomePageFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.homepage_layout,null);
+        View view = inflater.inflate(R.layout.homepage_listview,null);
         listView = (ListView) view.findViewById(R.id.home_listview);
         homePageAdapter = new HomePageAdapter(getActivity(),getlists());
         listView.setAdapter(homePageAdapter);
+        View view1 = LayoutInflater.from(getActivity()).inflate(R.layout.homepage_header,null);
+        listView.addHeaderView(view1);
         return view;
     }
 
