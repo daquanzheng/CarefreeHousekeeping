@@ -1,4 +1,4 @@
-package micro.com.carefreehousekeeping.Activity;
+package micro.com.carefreehousekeeping.Activity.CustomControls;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import micro.com.carefreehousekeeping.Activity.Utils.SystemInfo;
 import micro.com.carefreehousekeeping.R;
 
 /**
@@ -116,7 +117,7 @@ public class SwitchView extends View{
 
     private void init(Context context){
         paint=new Paint();
-        height=SystemInfo.getHeight(context);
+        height= SystemInfo.getHeight(context);
         point1=new MidPoint(width/2,height/7+r1);
         point2=new MidPoint(width/2,(height*2.5f)/7+r2);
         point3=new MidPoint(width/2,(height*4f)/7+r3);

@@ -1,4 +1,4 @@
-package micro.com.carefreehousekeeping.Activity;
+package micro.com.carefreehousekeeping.Activity.Utils;
 
 import android.app.Activity;
 import android.content.Context;
