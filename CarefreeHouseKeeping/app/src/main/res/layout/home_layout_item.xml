@@ -63,7 +63,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="从业时间："
-                    android:layout_marginTop="2dp"/>
+                    android:layout_marginTop="1dp"/>
                     <TextView
                         android:id="@+id/working_years"
                         android:layout_width="wrap_content"
@@ -82,7 +82,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="工作范围："
-                    android:layout_marginTop="2dp"/>
+                    android:layout_marginTop="1dp"/>
                 <TextView
                     android:id="@+id/working_range"
                     android:layout_width="wrap_content"
@@ -93,7 +93,7 @@
                     android:id="@+id/brief_introduction"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="1dp"
                     android:textColor="#D7D7D7"
                     android:text="@string/brief_jntroduction"/>
             </LinearLayout>

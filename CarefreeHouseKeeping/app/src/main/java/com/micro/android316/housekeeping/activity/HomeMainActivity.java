@@ -6,8 +6,10 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.KeyEvent;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.micro.android316.housekeeping.R;
 import com.micro.android316.housekeeping.fragment.HomePageFragment;
@@ -21,12 +23,15 @@ import java.util.List;
 public class HomeMainActivity extends FragmentActivity{
     RadioGroup radioGroup;
     RadioButton homePage,homeOrder,homeMine;
-    List<Fragment> fragmentList = new ArrayList<>();
-    ViewPager viewPager;
+    private List<Fragment> fragmentList = new ArrayList<>();
+    private ViewPager viewPager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_main);
+
+        time1 = System.currentTimeMillis();
+
         radioGroup = (RadioGroup) findViewById(R.id.homepage_radiogroup);
         viewPager = (ViewPager) findViewById(R.id.homepage_viewpager);
         homePage = (RadioButton) findViewById(R.id.home_page);
@@ -115,5 +120,26 @@ public class HomeMainActivity extends FragmentActivity{
         public int getCount() {
             return fragmentList.size();
         }
+    }
+
+    long time1,time2;
+    //重写手机外部返回键的监听
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            time2 = System.currentTimeMillis();
+            if(time2 - time1 > 1000)
+            {
+                Toast.makeText(HomeMainActivity.this, "再次点击退出", Toast.LENGTH_SHORT).show();
+                time1 = time2;
+                return true;
+            }else{
+                //此处添加退出整个应用的代码
+                finish();
+                return true;
+            }
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
