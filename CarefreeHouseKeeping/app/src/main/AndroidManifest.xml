@@ -8,25 +8,15 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-
-        </activity>
-
-        <activity android:name=".activity.Payment"/>
-        <activity android:name=".activity.Appointment">
-
-        </activity>
-        <activity android:name=".activity.Category" >
+        <activity android:name=".activity.ToheaderActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.Elderly"/>
-        <activity android:name=".activity.NannyInformation"/>
-        <activity android:name=".activity.OrderConfirm"/>
-
+        <activity android:name=".activity.HomeMainActivity"/>
+        <activity android:name=".activity.GuideActivity"/>
     </application>
 
 </manifest>
