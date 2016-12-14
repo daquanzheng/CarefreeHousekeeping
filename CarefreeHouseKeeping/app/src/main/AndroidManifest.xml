@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.micro.android316.housekeeping">
-    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -9,13 +8,23 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.FeedBack">
+        <activity android:name=".activity.ToheaderActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.HomeMainActivity"/>
+        <activity android:name=".activity.GuideActivity"/>
+
+        <activity android:name=".activity.Appointment"/>
+        <activity android:name=".activity.Category"/>
+        <activity android:name=".activity.Elderly"/>
+        <activity android:name=".activity.Payment"/>
+        <activity android:name=".activity.NannyInformation"/>
+        <activity android:name=".activity.OrderConfirm"/>
+
     </application>
 
 </manifest>

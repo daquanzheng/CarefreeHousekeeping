@@ -104,6 +104,8 @@
             android:textSize="17sp"
             android:textColor="#BFBEBE"
             android:background="@color/background_color"
-            android:padding="10dp"/>
+            android:paddingLeft="10dp"
+            android:paddingTop="7dp"
+            android:paddingBottom="0dp"/>
         </LinearLayout>
 </LinearLayout>

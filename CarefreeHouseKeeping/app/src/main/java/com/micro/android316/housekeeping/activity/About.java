@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.micro.android316.housekeeping.R;
 
+import com.micro.android316.housekeeping.R;
+
 /**
  * Created by Administrator on 2016/12/12.
  */
