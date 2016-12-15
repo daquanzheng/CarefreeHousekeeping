@@ -16,18 +16,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.ToheaderActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".activity.HomeMainActivity"/>
         <activity android:name=".activity.GuideActivity"/>
 
         <activity android:name=".activity.Appointment"/>
         <activity android:name=".activity.Category">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".activity.Elderly"/>
         <activity android:name=".activity.Payment"/>
