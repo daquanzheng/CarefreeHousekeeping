@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.micro.android316.housekeeping.R;
 import com.micro.android316.housekeeping.fragment.HomePageFragment;
 import com.micro.android316.housekeeping.fragment.MainIndentFragment;
+import com.micro.android316.housekeeping.fragment.MineFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,7 +91,7 @@ public class HomeMainActivity extends FragmentActivity{
                         homeMine.setTextColor(getResources().getColor(R.color.white));
                         break;
                     case R.id.home_mine:
-//                        viewPager.setCurrentItem(2);
+                        viewPager.setCurrentItem(2);
                         homePage.setTextColor(getResources().getColor(R.color.white));
                         homeOrder.setTextColor(getResources().getColor(R.color.white));
                         homeMine.setTextColor(getResources().getColor(R.color.yellow));
@@ -103,8 +104,10 @@ public class HomeMainActivity extends FragmentActivity{
     public void getFragmentList() {
         HomePageFragment homePageFragment = new HomePageFragment();
         MainIndentFragment mainIndentFragment = new MainIndentFragment();
+        MineFragment mineFragment = new MineFragment();
         fragmentList.add(homePageFragment);
         fragmentList.add(mainIndentFragment);
+        fragmentList.add(mineFragment);
     }
     public class MyViewPagerFragment extends FragmentStatePagerAdapter{
 
