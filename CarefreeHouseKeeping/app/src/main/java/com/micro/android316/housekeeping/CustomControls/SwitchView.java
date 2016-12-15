@@ -12,7 +12,6 @@ import com.micro.android316.housekeeping.R;
 import com.micro.android316.housekeeping.utils.SystemInfo;
 
 
-
 /**
  * Created by Administrator on 2016/12/9.
  */
@@ -55,6 +54,7 @@ public class SwitchView extends View{
         super(context, attrs, defStyleAttr);
         init(context);
     }
+
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -188,7 +188,8 @@ public class SwitchView extends View{
         return true;
     }
 
-    private void drawOval(Canvas canvas,MidPoint midPoint,float r,int w,int n){
+
+    private void drawOval(Canvas canvas, MidPoint midPoint, float r, int w, int n){
         paint.setColor(w);
         paint.setStyle(Paint.Style.FILL);
         paint.setStrokeWidth(5);
@@ -196,9 +197,16 @@ public class SwitchView extends View{
         float top=midPoint.y-r;
         float right=midPoint.x+r;
         float bottom=midPoint.y+r;
-        canvas.drawOval(left,top,right,bottom,paint);
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            canvas.drawOval(left,top,right,bottom,paint);
+//        }
+        canvas.drawCircle(midPoint.x,midPoint.y,r,paint);
+        //canvas.drawCircle();
         paint.setColor(n);
-        canvas.drawOval(left+10,top+10,right-10,bottom-10,paint);
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            canvas.drawOval(left+10,top+10,right-10,bottom-10,paint);
+//        }
+        canvas.drawCircle(midPoint.x,midPoint.y,r-10,paint);
     }
 
     private void drawText(MidPoint midPoint,Canvas canvas,float size,int color,String conten){

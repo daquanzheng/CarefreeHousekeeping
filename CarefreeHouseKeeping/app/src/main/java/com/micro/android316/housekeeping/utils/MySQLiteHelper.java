@@ -15,7 +15,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create databases image(_id not null primary key autoincrement,key varchar(200) not null,value varchar(200) not null)");
+        db.execSQL("create table image(_id integer not null primary key autoincrement,key varchar(200) not null,value varchar(200) not null)");
     }
 
     @Override
