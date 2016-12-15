@@ -8,7 +8,7 @@ import android.graphics.Bitmap;
 public class ChatContent {
     String chat;
     String name;
-    Bitmap head;
+    int head;
 
     public String getChat() {
         return chat;
@@ -26,11 +26,11 @@ public class ChatContent {
         this.name = name;
     }
 
-    public Bitmap getHead() {
+    public int getHead() {
         return head;
     }
 
-    public void setHead(Bitmap head) {
+    public void setHead(int head) {
         this.head = head;
     }
 }
