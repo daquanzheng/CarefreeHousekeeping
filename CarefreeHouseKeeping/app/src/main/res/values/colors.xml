@@ -3,4 +3,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="TopBarBg">#121212</color>
+    <color name="white_text">#fffefe</color>
+    <color name="wode_text">#424141</color>
+    <color name="wode_space">#E6E6E6</color>
+    <color name="text_blue">#1598ce</color>
+    <color name="address_phone_number">#5A5A5A</color>
+    <color name="address_text">#807D7D</color>
 </resources>
