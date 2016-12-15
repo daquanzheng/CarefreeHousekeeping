@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.micro.android316.housekeeping.R;
 import com.micro.android316.housekeeping.fragment.HomePageFragment;
+import com.micro.android316.housekeeping.fragment.MainIndentFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +30,6 @@ public class HomeMainActivity extends FragmentActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_main);
-
-        time1 = System.currentTimeMillis();
 
         radioGroup = (RadioGroup) findViewById(R.id.homepage_radiogroup);
         viewPager = (ViewPager) findViewById(R.id.homepage_viewpager);
@@ -56,10 +55,10 @@ public class HomeMainActivity extends FragmentActivity{
                         homePage.setChecked(true);
                         break;
                     case 1:
-
+                        homeOrder.setChecked(true);
                         break;
                     case 2:
-
+                        homeMine.setChecked(true);
                         break;
                 }
             }
@@ -85,7 +84,7 @@ public class HomeMainActivity extends FragmentActivity{
                         homeMine.setTextColor(getResources().getColor(R.color.white));
                         break;
                     case R.id.home_order:
-//                        viewPager.setCurrentItem(1);
+                        viewPager.setCurrentItem(1);
                         homePage.setTextColor(getResources().getColor(R.color.white));
                         homeOrder.setTextColor(getResources().getColor(R.color.yellow));
                         homeMine.setTextColor(getResources().getColor(R.color.white));
@@ -103,7 +102,9 @@ public class HomeMainActivity extends FragmentActivity{
 
     public void getFragmentList() {
         HomePageFragment homePageFragment = new HomePageFragment();
+        MainIndentFragment mainIndentFragment = new MainIndentFragment();
         fragmentList.add(homePageFragment);
+        fragmentList.add(mainIndentFragment);
     }
     public class MyViewPagerFragment extends FragmentStatePagerAdapter{
 
@@ -129,7 +130,7 @@ public class HomeMainActivity extends FragmentActivity{
         if(keyCode == KeyEvent.KEYCODE_BACK)
         {
             time2 = System.currentTimeMillis();
-            if(time2 - time1 > 1000)
+            if(time2 - time1 > 1500)
             {
                 Toast.makeText(HomeMainActivity.this, "再次点击退出", Toast.LENGTH_SHORT).show();
                 time1 = time2;
