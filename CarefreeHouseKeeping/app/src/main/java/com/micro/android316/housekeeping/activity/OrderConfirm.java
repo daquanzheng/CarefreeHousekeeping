@@ -99,7 +99,7 @@ public class OrderConfirm extends Activity {
 
     //MON、THU、WED、THU、FRI、SAT、SUN
     public String jieXi(String e){
-        String es[]={"Mon","Thu","Wed","Fri","Sat","Sun"};
+        String es[]={"Mon","The","Wed","Thu","Fri","Sat","Sun"};
         if(e.equals(es[0])){
             return "星期一";
         }
