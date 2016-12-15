@@ -3,11 +3,22 @@ package com.micro.android316.housekeeping.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.micro.android316.housekeeping.R;
+import com.micro.android316.housekeeping.utils.GpsUtil;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Administrator on 2016/12/12.
@@ -17,18 +28,56 @@ public class Appointment extends Activity {
 
     private Button yuYue;
     private ImageView back;
+    private TextView time,hour,month,day,addHour,subHour,addDay,subDay,addMonth,subMonth,addTime,subTime;
+    private String h,d,t,m,y;
+    private String thisM,thisD,thisT;
+    private long timeInfo;
+    private TextView address;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.appointment);
         init();
+        //getAddress();
         yuYue.setOnClickListener(listener);
         back.setOnClickListener(listener);
+        addTime.setOnClickListener(listener);
+        subTime.setOnClickListener(listener);
+        addHour.setOnClickListener(listener);
+        subHour.setOnClickListener(listener);
+        addMonth.setOnClickListener(listener);
+        subMonth.setOnClickListener(listener);
+        addDay.setOnClickListener(listener);
+        subDay.setOnClickListener(listener);
+        getAddress();
+
     }
 
     private void init(){
         yuYue= (Button) findViewById(R.id.li_ji_yu_yue_button);
         back= (ImageView) findViewById(R.id.back);
+        time= (TextView) findViewById(R.id.time);
+        subTime= (TextView) findViewById(R.id.sub_time);
+        addTime= (TextView) findViewById(R.id.add_time);
+        hour= (TextView) findViewById(R.id.hour);
+        subHour= (TextView) findViewById(R.id.sub_hour);
+        addHour= (TextView) findViewById(R.id.add_hour);
+        month= (TextView) findViewById(R.id.mouth);
+        subMonth= (TextView) findViewById(R.id.sub_month);
+        addMonth= (TextView) findViewById(R.id.add_month);
+        day= (TextView) findViewById(R.id.day);
+        addDay= (TextView) findViewById(R.id.add_day);
+        subDay= (TextView) findViewById(R.id.sub_day);
+        setT();
+        d=day.getText().toString();
+        h=hour.getText().toString();
+        m=month.getText().toString();
+        t=time.getText().toString();
+        thisD=d;
+        thisM=m;
+        thisT=t;
+        address= (TextView) findViewById(R.id.address);
     }
 
     View.OnClickListener listener=new View.OnClickListener() {
@@ -42,7 +91,274 @@ public class Appointment extends Activity {
                 case R.id.back:
                     finish();
                     break;
+                case R.id.add_day:
+                    addDay();
+                    break;
+                case R.id.sub_day:
+                    subDay();
+                    break;
+                case R.id.add_month:
+                    addMonth();
+                    break;
+                case R.id.sub_month:
+                    subMonth();
+                    break;
+                case R.id.add_hour:
+                    addHour();
+                    break;
+                case R.id.sub_hour:
+                    subHour();
+                    break;
+                case R.id.add_time:
+                    addTime();
+                    break;
+                case R.id.sub_time:
+                    subTime();
+                    break;
+
+
+
             }
         }
     };
+
+    public void setT(){
+        SimpleDateFormat mat=new SimpleDateFormat("yyyy");
+        SimpleDateFormat format=new SimpleDateFormat("MM");
+        SimpleDateFormat format1=new SimpleDateFormat("dd");
+        SimpleDateFormat format2=new SimpleDateFormat("HH:mm");
+        timeInfo=System.currentTimeMillis()+1000*60*60*3;
+        time.setText(format2.format(new Date(timeInfo)));
+        day.setText(format1.format(new Date(timeInfo)));
+        month.setText(format.format(new Date(timeInfo)));
+        y=mat.format(new Date(timeInfo));
+    }
+
+
+
+    public void addHour(){
+        char c=h.charAt(0);
+        int i=c-48;
+        if(i==8){
+            return;
+        }
+        i+=1;
+        h=i+"";
+        hour.setText(h+"小时");
+    }
+
+    public void subHour(){
+        char c=h.charAt(0);
+        int i=c-48;
+        if(i==1){
+            return;
+        }
+        i-=1;
+        h=i+"";
+        hour.setText(h+"小时");
+    }
+
+    public void addMonth(){
+        int i=toInt(m);
+        if(i==12){
+            i=1;
+            m=i+"";
+            month.setText(m);
+            timeInfo+=getSForMonth(i);
+            return;
+        }
+        i+=1;
+        m=i+"";
+        month.setText(m);
+        timeInfo+=getSForMonth(i);
+
+
+    }
+
+    public void subMonth(){
+        int i=toInt(m);
+        if(i==toInt(thisM)){
+
+            return;
+        }
+        if(i==1){
+            m=12+"";
+            month.setText(m);
+            timeInfo-=getSForMonth(i);
+            return;
+        }
+        i-=1;
+        m=i+"";
+        month.setText(m);
+        timeInfo-=getSForMonth(i);
+    }
+    public void addDay(){
+        int d=toInt(this.d);
+        int m=toInt(this.m);
+        if(isRun()){
+            if(m==1||m==3||m==5||m==7||m==8||m==10||m==12){
+              if(d==31){
+                  day.setText(1+"");
+                  timeInfo+=24*3600*1000;
+                  return;
+              }
+            }else if(m==2){
+                if(d==29){
+                    day.setText(1+"");
+                    timeInfo+=24*3600*1000;
+                    return;
+                }
+            }else {
+                if(d==31){
+                    day.setText(1+"");
+                    timeInfo+=24*3600*1000;
+                    return;
+                }
+            }
+        }else {
+            if(m==1||m==3||m==5||m==7||m==8||m==10||m==12){
+                if(d==31){
+                    day.setText(1+"");
+                    timeInfo+=24*3600*1000;
+                    return;
+                }
+            }else if(m==2){
+                if(d==28){
+                    day.setText(1+"");
+                    timeInfo+=24*3600*1000;
+                    return;
+                }
+            }else {
+                if(d==31){
+                    day.setText(1+"");
+                    timeInfo+=24*3600*1000;
+                    return;
+                }
+            }
+        }
+        d+=1;
+        this.d=d+"";
+        day.setText(d+"");
+        timeInfo+=24*3600*1000;
+
+    }
+    public void subDay(){
+        int i=toInt(d);
+        if(i==toInt(thisD)){
+            return;
+        }
+        i-=1;
+        this.d=i+"";
+        day.setText(i+"");
+        timeInfo-=24*3600*1000;
+
+    }
+    public void addTime(){
+        String s=t.split(":")[0];
+        int i=toInt(s);
+        if(i==18){
+            return;
+        }
+        i+=1;
+        t=i+"";
+        time.setText(t+":00");
+        timeInfo+=3600*1000;
+
+
+    }
+    public void subTime(){
+        String s=t.split(":")[0];
+        int i=toInt(s);
+        if(i==toInt(thisT.split(":")[0])){
+            return;
+        }
+        i-=1;
+        t=i+"";
+        time.setText(t+":00");
+        timeInfo-=3600*1000;
+    }
+
+    public int toInt(String s){
+        int n=0;
+        for(int i=0;i<s.length();i++){
+            int nn=s.charAt(i)-48;
+            n=n*10+nn;
+        }
+        return n;
+    }
+
+    public long getSForMonth(int m){
+        long l=0;
+        if(isRun()){
+            if(m==1||m==3||m==5||m==7||m==8||m==10||m==12){
+                l=31*3600*1000*24;
+            }else if(m==2){
+                l=29*3600*1000*24;
+            }else {
+                l=30*3600*1000*24;
+            }
+
+        }else {
+            if(m==1||m==3||m==5||m==7||m==8||m==10||m==12){
+                l=31*3600*1000*24;
+            }else if(m==2){
+                l=28*3600*1000*24;
+            }else {
+                l=30*3600*1000*24;
+            }
+        }
+
+        return l;
+    }
+
+
+    public boolean isRun(){
+        int y=toInt(this.y);
+        if((y%4==0 && y%100!=0)||y%400==0){
+            return  true;
+        }else {
+            return false;
+        }
+    }
+
+    public void getAddress(){
+        GpsUtil util=new GpsUtil(this,handler);
+        util.getAddressInfo();
+    }
+
+    private Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message message){
+            //Toast.makeText(Appointment.this, (String) message.obj,Toast.LENGTH_LONG).show();
+            //地\t\t址：重庆市沙坪坝区小龙坎正街嘉福苑3幢2单元204
+            address.setText("地\t\t址："+address((String) message.obj));
+        }
+
+    };
+
+    private String address(String json){
+        String s="";
+        try {
+            JSONObject object=new JSONObject(json);
+            JSONArray array=object.getJSONArray("result");
+            for(int i=1;i<array.length();i++){
+                 object=array.getJSONObject(i);
+                 String ss=null;
+                 ss=object.getString("DistrictName");
+                if(ss!=null){
+                    s+=ss;
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return s;
+
+
+    }
+
+
+
+
+
 }

@@ -9,15 +9,16 @@ public class ElderlyDate {
     private String headURL;
     private String evaluateURL;
     private String name;
-    private int age;
+    private String age;
     private String experience;
     private String workSpace;
     private String briefIntroduction;
-    private int guanZhu_count;
+    private String guanZhu_count;
     private int pingLun_count;
     private int zhan_count;
+    private String id;
 
-    public ElderlyDate(String headURL, String evaluateURL, String name, int age, String experience, String workSpace, String briefIntroduction, int guanZhu_count, int pingLun_count, int zhan_count) {
+    public ElderlyDate(String headURL, String evaluateURL, String name, String age, String experience, String workSpace, String briefIntroduction, String guanZhu_count, int pingLun_count, int zhan_count) {
         this.headURL = headURL;
         this.evaluateURL = evaluateURL;
         this.name = name;
@@ -30,6 +31,13 @@ public class ElderlyDate {
         this.zhan_count = zhan_count;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public ElderlyDate(){}
 
@@ -57,11 +65,11 @@ public class ElderlyDate {
         this.name = name;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
@@ -89,11 +97,11 @@ public class ElderlyDate {
         this.briefIntroduction = briefIntroduction;
     }
 
-    public int getGuanZhu_count() {
+    public String getGuanZhu_count() {
         return guanZhu_count;
     }
 
-    public void setGuanZhu_count(int guanZhu_count) {
+    public void setGuanZhu_count(String guanZhu_count) {
         this.guanZhu_count = guanZhu_count;
     }
 

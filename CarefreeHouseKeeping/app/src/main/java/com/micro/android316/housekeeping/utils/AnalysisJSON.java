@@ -1,5 +1,7 @@
 package com.micro.android316.housekeeping.utils;
 
+import android.util.Log;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +16,7 @@ import java.util.HashMap;
  *           如[{},{},{}]：这种形式因该转化为hashMap[]
  *             {}:这种形式因该转化为hashMap
  *
- *             注意:本类可能不支持[[],[],[],[]]类型的json
+ *             注意:本类这适合观赏，并无实际意义，原因，解析英文的时候倒是没什么，解析中文的时候，编码问题会出错
  *
  *
  * */
@@ -81,19 +83,19 @@ public class AnalysisJSON {
 	}
 
 	private HashMap<String,Object>[] analisisArray(String s){//解析数组
-
-		String ss[]=s.split("}");
-		if(ss.length==0 || ss==null){
+		List<String> ss=division(s);
+		if(ss.size()==0 || ss==null){
 
 			return null;
 		}
+		Log.i("hhh","ss="+s);
+		Log.i("hhh","ss.size="+ss.size());
 
-		HashMap<String,Object> hash[]=new HashMap[ss.length];
+		HashMap<String,Object> hash[]=new HashMap[ss.size()];
 		int j=0;
 		for(String i:ss){
 			if(i.charAt(0)=='{'){
-				i=subHeadAndTail(i,'{',',');
-
+				i=subHeadAndTail(i,'{','}');
 				hash[j++]=analisisClass(i);
 			}
 		}

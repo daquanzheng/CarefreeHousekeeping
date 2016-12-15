@@ -22,4 +22,6 @@
     <color name="txt_normal">#595959</color>
     <color name="txt_list">#B3B3B3</color>
     <color name="btn_green">#27ABA4</color>
+    <color name="good">#1598CE</color>
+    <color name="bad">#807B7B</color>
 </resources>

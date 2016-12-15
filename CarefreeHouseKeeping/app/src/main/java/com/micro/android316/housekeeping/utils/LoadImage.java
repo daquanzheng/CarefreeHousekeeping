@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.ImageView;
 
 import java.io.IOException;
@@ -44,19 +45,22 @@ public class LoadImage extends AsyncTask<String,Void,Bitmap>{
 
     @Override
     protected Bitmap doInBackground(String... params) {
-        Bitmap bitmap;
+        Bitmap bitmap=null;
         InputStream is=null;
         try {
             is=new URL(url).openConnection().getInputStream();
             InputStream iss=SaveInFile.get(context,url);
             if(AppFinal.memery.get(url)!=null){
                 bitmap=AppFinal.memery.get(url);
+                Log.i("hhh","bitmap1="+bitmap+"");
             }else if(iss!=null){
                 bitmap= BitmapFactory.decodeStream(iss);
+                Log.i("hhh","bitmap2="+bitmap+"");
             }else {
                 SaveInFile.save(context,is,url);
                 iss=SaveInFile.get(context,url);
                 bitmap=BitmapFactory.decodeStream(iss);
+                Log.i("hhh","bitmap3="+bitmap+"");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -70,6 +74,6 @@ public class LoadImage extends AsyncTask<String,Void,Bitmap>{
             }
         }
 
-        return null;
+        return bitmap;
     }
 }
