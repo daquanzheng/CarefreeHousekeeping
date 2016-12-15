@@ -51,6 +51,7 @@
             android:drawablePadding="7dp"
             />
         <TextView
+            android:id="@+id/sub_hour"
             android:layout_width="23dp"
             android:layout_height="23dp"
             android:text="一"
@@ -59,6 +60,7 @@
             android:gravity="center"
             />
         <TextView
+            android:id="@+id/hour"
             android:layout_width="51dp"
             android:layout_height="23dp"
             android:text="2小时"
@@ -69,6 +71,7 @@
 
             />
         <TextView
+            android:id="@+id/add_hour"
             android:layout_width="23dp"
             android:layout_height="23dp"
             android:text="十"
@@ -118,8 +121,10 @@
 
             android:layout_marginLeft="35dp"
             android:drawablePadding="7dp"
-            />
+            android:id="@+id/textView3" />
+
         <TextView
+            android:id="@+id/sub_month"
             android:layout_width="23dp"
             android:layout_height="23dp"
             android:text="一"
@@ -128,6 +133,7 @@
             android:gravity="center"
             />
         <TextView
+            android:id="@+id/mouth"
             android:layout_width="51dp"
             android:layout_height="23dp"
             android:text="10"
@@ -138,6 +144,7 @@
 
             />
         <TextView
+            android:id="@+id/add_month"
             android:layout_width="23dp"
             android:layout_height="23dp"
             android:text="十"
@@ -168,6 +175,7 @@
             android:layout_marginBottom="15dp"
             />
         <TextView
+            android:id="@+id/sub_day"
             android:layout_width="23dp"
             android:layout_height="23dp"
             android:text="一"
@@ -176,6 +184,7 @@
             android:gravity="center"
             />
         <TextView
+            android:id="@+id/day"
             android:layout_width="51dp"
             android:layout_height="23dp"
             android:text="22"
@@ -186,6 +195,7 @@
 
             />
         <TextView
+            android:id="@+id/add_day"
             android:layout_width="23dp"
             android:layout_height="23dp"
             android:text="十"
@@ -213,6 +223,7 @@
             android:layout_marginLeft="35dp"
             />
         <TextView
+            android:id="@+id/sub_time"
             android:layout_width="23dp"
             android:layout_height="23dp"
             android:text="一"
@@ -221,6 +232,7 @@
             android:gravity="center"
             />
         <TextView
+            android:id="@+id/time"
             android:layout_width="51dp"
             android:layout_height="23dp"
             android:text="8:00"
@@ -231,6 +243,7 @@
 
             />
         <TextView
+            android:id="@+id/add_time"
             android:layout_width="23dp"
             android:layout_height="23dp"
             android:text="十"
@@ -251,6 +264,7 @@
         />
 
     <TextView
+        android:id="@+id/address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="14dp"

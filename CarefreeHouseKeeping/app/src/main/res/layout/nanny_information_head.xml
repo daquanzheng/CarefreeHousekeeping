@@ -24,6 +24,7 @@
             android:layout_marginLeft="10dp"
             >
             <ImageView
+                android:id="@+id/head"
                 android:layout_width="101dp"
                 android:layout_height="101dp"
                 android:scaleType="centerCrop"
@@ -41,6 +42,7 @@
                     android:orientation="horizontal"
                     android:layout_height="wrap_content">
                     <TextView
+                        android:id="@+id/name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="张淑芬"
@@ -106,6 +108,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="18dp"
@@ -155,6 +158,7 @@
                 android:gravity="center_vertical"
                 >
                 <CheckBox
+                    android:id="@+id/b1"
                     android:background="@drawable/check"
                     android:layout_width="12dp"
                     android:layout_height="12dp"
@@ -181,6 +185,7 @@
                 android:gravity="center"
                 >
                 <CheckBox
+                    android:id="@+id/b2"
                     android:background="@drawable/check"
                     android:layout_width="12dp"
                     android:layout_height="12dp"
@@ -207,6 +212,7 @@
                 android:gravity="right"
                 >
                 <CheckBox
+                    android:id="@+id/b3"
                     android:background="@drawable/check"
                     android:layout_width="12dp"
                     android:layout_height="12dp"
@@ -234,6 +240,7 @@
                 android:gravity="right"
                 >
                 <CheckBox
+                    android:id="@+id/b4"
                     android:background="@drawable/check"
                     android:layout_width="12dp"
                     android:layout_height="12dp"
@@ -297,6 +304,7 @@
                 android:gravity="center_vertical"
                 >
                 <CheckBox
+                    android:id="@+id/b5"
                     android:background="@drawable/check"
                     android:layout_width="12dp"
                     android:layout_height="12dp"
@@ -323,6 +331,7 @@
                 android:gravity="center"
                 >
                 <CheckBox
+                    android:id="@+id/b6"
                     android:background="@drawable/check"
                     android:layout_width="12dp"
                     android:layout_height="12dp"
@@ -349,6 +358,7 @@
                 android:gravity="right"
                 >
                 <CheckBox
+                    android:id="@+id/b7"
                     android:background="@drawable/check"
                     android:layout_width="12dp"
                     android:layout_height="12dp"
@@ -376,6 +386,7 @@
                 android:gravity="right"
                 >
                 <CheckBox
+                    android:id="@+id/b8"
                     android:background="@drawable/check"
                     android:layout_width="12dp"
                     android:layout_height="12dp"
@@ -411,6 +422,7 @@
         >
 
         <TextView
+            android:id="@+id/good"
             android:padding="9dp"
             android:background="#fff"
             android:layout_width="0dp"
@@ -421,6 +433,7 @@
             android:gravity="center"
             />
         <TextView
+            android:id="@+id/normal"
             android:background="#fff"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -433,6 +446,7 @@
             android:layout_marginRight="1dp"
             />
         <TextView
+            android:id="@+id/bad"
             android:background="#fff"
             android:layout_width="0dp"
             android:layout_weight="1"

@@ -8,6 +8,14 @@ import android.app.Application;
 
 public class AppFinal extends Application {
     public static SaveInMemery memery=SaveInMemery.getMemoryCache(50);
+    private static AppFinal appFinal;
 
+    private AppFinal(){};
+    public static AppFinal getAppfinal(){
+        if(appFinal==null){
+            appFinal=new AppFinal();
+        }
+        return appFinal;
+    }
 
 }
