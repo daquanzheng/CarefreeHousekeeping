@@ -32,7 +32,8 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/home_search" android:padding="7dp"
+            android:src="@mipmap/home_search"
+            android:padding="7dp"
             android:layout_marginRight="4dp"/>
     </LinearLayout>
     <LinearLayout
@@ -50,6 +51,7 @@
             android:layout_margin="10dp"
             android:orientation="horizontal">
             <RelativeLayout
+                android:id="@+id/go_nurse"
                 android:layout_width="197dp"
                 android:layout_height="wrap_content">
                 <ImageView
