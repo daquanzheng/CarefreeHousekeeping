@@ -4,16 +4,37 @@ package com.micro.android316.housekeeping.model;
  * Created by Administrator on 2016/12/12.
  */
 public class HomePageModel {
-    private int picture;
+    private String picture;
+    private double numStars;
     private String name,workRanges,briefInduction;
-    private int age,workYears,browseTimes,commentTimes;
+    private int id;
+    private int age;
+    private int workYears;
+    private int browseTimes;
+    private int commentTimes;
 
-    public int getPicture() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getPicture() {
         return picture;
     }
 
-    public void setPicture(int picture) {
+    public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    public double getNumStars() {
+        return numStars;
+    }
+
+    public void setNumStars(double numStars) {
+        this.numStars = numStars;
     }
 
     public String getName() {
@@ -70,5 +91,21 @@ public class HomePageModel {
 
     public void setCommentTimes(int commentTimes) {
         this.commentTimes = commentTimes;
+    }
+
+    @Override
+    public String toString() {
+        return "HomePageModel{" +
+                "picture='" + picture + '\'' +
+                ", numStars=" + numStars +
+                ", name='" + name + '\'' +
+                ", workRanges='" + workRanges + '\'' +
+                ", briefInduction='" + briefInduction + '\'' +
+                ", id=" + id +
+                ", age=" + age +
+                ", workYears=" + workYears +
+                ", browseTimes=" + browseTimes +
+                ", commentTimes=" + commentTimes +
+                '}';
     }
 }

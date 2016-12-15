@@ -86,7 +86,7 @@ public class FeedBack extends Activity {
         commit.setOnClickListener(onClickListener);
     }
     public void saveDate(){
-        String httpURL="http://192.168.7.2//index.php/Home/Index/feedback?idea="+strIdea+"&phone="+strPhone;
+        String httpURL="http://192.168.7.3//index.php/Home/Index/feedback?idea="+strIdea+"&phone="+strPhone;
         try {
             StringBuilder stringBuilder=new StringBuilder();
             URL url=new URL(httpURL);

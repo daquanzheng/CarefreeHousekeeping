@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.micro.android316.housekeeping.utils.Topbar
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:background="@color/white_text"
+        custom:leftImg="@mipmap/address_arrow"
+        custom:rightTextColor="@color/text_blue"
+        custom:rightText="新增地址"
+        custom:rightTextSize="6sp"
+        custom:title="常用地址"
+        custom:titleTextColor="#424141"
+        custom:titleTextSize="12sp"
+        android:layout_alignParentTop="true"
+        android:padding="10dp">
+    </com.micro.android316.housekeeping.utils.Topbar>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/wode_space"
+        ></View>
+    <ListView
+        android:id="@+id/listView_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:dividerHeight="1dp">
+    </ListView>
+
+</LinearLayout>
