@@ -26,4 +26,11 @@
     <color name="bad">#807B7B</color>
     <color name="light_black">#444</color>
     <color name="dark_black">#111</color>
+    <color name="TopBarBg">#121212</color>
+    <color name="white_text">#fffefe</color>
+    <color name="wode_text">#424141</color>
+    <color name="wode_space">#E6E6E6</color>
+    <color name="text_blue">#1598ce</color>
+    <color name="address_phone_number">#5A5A5A</color>
+    <color name="address_text">#807D7D</color>
 </resources>
