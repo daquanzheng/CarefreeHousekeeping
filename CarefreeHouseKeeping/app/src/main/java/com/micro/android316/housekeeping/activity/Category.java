@@ -328,7 +328,7 @@ public class Category extends Activity{
 
 
     public void replace(final int i){
-        ObjectAnimator animator= ObjectAnimator.ofFloat(pager,"Alpha",1f,0.5f,0f,0.5f,1f);
+        ObjectAnimator animator= ObjectAnimator.ofFloat(pager,"Alpha",1f,0.5f,0f,0f,0.5f,1f);
         animator.setDuration(2000);
         animator.start();
 
@@ -343,9 +343,4 @@ public class Category extends Activity{
     }
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-    }
 }

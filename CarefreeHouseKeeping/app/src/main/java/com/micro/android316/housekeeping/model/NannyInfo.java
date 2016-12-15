@@ -15,6 +15,8 @@ public class NannyInfo{
         this.content = content;
     }
 
+    public NannyInfo(){}
+
     public String getImage() {
         return image;
     }
@@ -37,5 +39,15 @@ public class NannyInfo{
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+
+    @Override
+    public String toString() {
+        return "NannyInfo{" +
+                "image='" + image + '\'' +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                '}';
     }
 }

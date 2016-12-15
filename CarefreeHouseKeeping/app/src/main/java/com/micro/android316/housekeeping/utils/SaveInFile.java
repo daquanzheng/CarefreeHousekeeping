@@ -15,7 +15,7 @@ import java.io.OutputStream;
 
 public class SaveInFile{
 
-    public static char[] chars={'.','/','\\','?',':','<','>','*','|','\'','"'};
+    public static char[] chars={'/','\\','?',':','<','>','*','|','\'','"'};
 
     public static void save(Context context, InputStream is,String url){
         url = filter(url, chars);
@@ -66,7 +66,7 @@ public class SaveInFile{
             char c=string.charAt(i);
             boolean canadd=true;
             for(int j=0;j<chars.length;j++){
-                if(c==chars[i]){
+                if(c==chars[j]){
                     canadd=false;
                     j=chars.length;
                 }
