@@ -16,11 +16,11 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/12/13.
  */
-public class chatContentAdapter extends BaseAdapter {
+public class ChatContentAdapter extends BaseAdapter {
     List<ChatContent> list;
     Context context;
     LayoutInflater layoutInflater;
-    public chatContentAdapter(Context context,List<ChatContent> list){
+    public ChatContentAdapter(Context context, List<ChatContent> list){
         this.list=list;
         this.context=context;
         layoutInflater=LayoutInflater.from(context);
@@ -42,17 +42,16 @@ public class chatContentAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if(convertView!=null){
+        if(convertView==null){
             convertView=layoutInflater.inflate(R.layout.listview_item_online_myself,null);
         }
         ChatContent chatContent=list.get(position);
         ImageView head=(ImageView)convertView.findViewById(R.id.img_myhead);
         TextView name=(TextView)convertView.findViewById(R.id.textview_name);
         TextView content=(TextView)convertView.findViewById(R.id.textview_content);
-        head.setImageBitmap(chatContent.getHead());
+        head.setImageResource(chatContent.getHead());
         name.setText(chatContent.getName());
         content.setText(chatContent.getChat());
-
         return convertView;
     }
 }
