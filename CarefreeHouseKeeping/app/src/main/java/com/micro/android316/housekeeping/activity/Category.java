@@ -47,6 +47,27 @@ public class Category extends Activity{
         back.setOnClickListener(listener);
 
 
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Intent intent=getIntent();
+        int s=intent.getIntExtra("location",0);
+        if(s==1){
+            forState(1,1);
+            choice.setPoint(1);
+            choice.setLast(1);
+        }else if(s==2){
+            forState(1,2);
+            choice.setPoint(2);
+            choice.setLast(2);
+        }else if(s==3){
+            forState(1,3);
+            choice.setPoint(3);
+            choice.setLast(3);
+        }
     }
 
     private void init(){//初始化变量
@@ -341,6 +362,80 @@ public class Category extends Activity{
             }
         });
     }
+
+    public void forState(int last,int state){
+        point=state;
+        movePoint a,b,c;
+        a=new movePoint();
+        b=new movePoint();
+        c=new movePoint();
+        switch (last){
+            case 1:
+                switch (state){
+                    case 1:
+                        break;
+                    case 2:
+                        a.set(60,36);
+                        b.set(36,60);
+                        c.set(36,36);
+                        function(a,b,c);
+                        replace(2);
+                        break;
+                    case 3:
+                        a.set(60,36);
+                        b.set(36,36);
+                        c.set(36,60);
+                        function(a,b,c);
+                        replace(3);
+                        break;
+                }
+                break;
+            case 2:
+                switch (state){
+                    case 2:
+                        break;
+                    case 1:
+                        a.set(36,60);
+                        b.set(60,36);
+                        c.set(36,36);
+                        function(a,b,c);
+                        replace(1);
+                        break;
+                    case 3:
+                        a.set(36,36);
+                        b.set(60,36);
+                        c.set(36,60);
+                        function(a,b,c);
+                        replace(3);
+                        break;
+                }
+                break;
+            case 3:
+                switch (state){
+                    case 3:
+                        break;
+                    case 1:
+                        a.set(36,60);
+                        b.set(36,36);
+                        c.set(60,36);
+                        function(a,b,c);
+                        replace(1);
+                        break;
+                    case 2:
+                        a.set(36,36);
+                        b.set(36,60);
+                        c.set(60,36);
+                        function(a,b,c);
+                        replace(2);
+                        break;
+                }
+                break;
+        }
+
+    }
+
+
+
 
 
 }

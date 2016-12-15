@@ -42,6 +42,9 @@ public class GpsUtil {
     public void getAddressInfo() {
         if(!isOpen(context)){openGPS(context);}
         getGPSConfi();
+        if(location==null){
+            return;
+        }
         new Thread() {
             public void run() {
                 getHttp();
