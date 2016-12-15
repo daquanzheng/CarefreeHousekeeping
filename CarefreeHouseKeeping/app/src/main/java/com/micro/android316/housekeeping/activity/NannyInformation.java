@@ -57,6 +57,7 @@ public class NannyInformation extends Activity {
     boolean[] bs={false,false,false,false,false,false,false,false};
     private int state=1;
     private TextView good,normal,bad;
+    private String type;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,7 +94,9 @@ public class NannyInformation extends Activity {
         pingLun.addHeaderView(view);
         pingLun.setAdapter(nannyAdapter);
         back= (ImageView) findViewById(R.id.back);
-        ID=getIntent().getStringExtra("id");
+        Intent intent=getIntent();
+        ID=intent.getStringExtra("id");
+        type=intent.getStringExtra("type");
         Log.i("hahaha",ID);
         nannyInfo=new NannyInfo();
         goodList=new ArrayList<>();
@@ -115,6 +118,8 @@ public class NannyInformation extends Activity {
             switch (v.getId()){
                 case  R.id.li_ji_yu_yue:
                     Intent intent=new Intent(NannyInformation.this,Appointment.class);
+                    intent.putExtra("id",ID);
+                    intent.putExtra("type",type);
                     startActivity(intent);
                     break;
                 case R.id.back:

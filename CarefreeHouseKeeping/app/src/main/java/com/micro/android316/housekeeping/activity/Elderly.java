@@ -94,6 +94,7 @@ public class Elderly extends Activity{
                 Intent intent=new Intent(Elderly.this, NannyInformation.class);
                 ElderlyDate date= (ElderlyDate) list.get(position-1);
                 intent.putExtra("id",date.getId());
+                intent.putExtra("type",date.getWorkSpace());
                 startActivity(intent);
             }
         });

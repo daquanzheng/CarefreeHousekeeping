@@ -39,6 +39,7 @@ public class Appointment extends Activity {
     private String thisM,thisD,thisT;
     private long timeInfo;
     private TextView address;
+    private String id,type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +85,9 @@ public class Appointment extends Activity {
         thisM=m;
         thisT=t;
         address= (TextView) findViewById(R.id.address);
+        Intent intent=getIntent();
+        id=intent.getStringExtra("id");
+        type=intent.getStringExtra("type");
     }
 
     View.OnClickListener listener=new View.OnClickListener() {
@@ -92,6 +96,11 @@ public class Appointment extends Activity {
             switch (v.getId()){
                 case R.id.li_ji_yu_yue_button:
                     Intent intent=new Intent(Appointment.this,OrderConfirm.class);
+                    intent.putExtra("address",address.getText());
+                    intent.putExtra("time",timeInfo);
+                    intent.putExtra("long",hour.getText());
+                    intent.putExtra("id",id);
+                    intent.putExtra("type",type);
                     startActivity(intent);
                     break;
                 case R.id.back:
