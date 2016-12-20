@@ -3,6 +3,7 @@ package com.micro.android316.housekeeping.fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -20,6 +21,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.micro.android316.housekeeping.R;
+import com.micro.android316.housekeeping.activity.Payment;
 import com.micro.android316.housekeeping.adapter.WaitpayAdapter;
 import com.micro.android316.housekeeping.adapter.WaitserviceAdapter;
 import com.micro.android316.housekeeping.model.Waitpay;
@@ -70,9 +72,9 @@ public class MainIndentFragment extends Fragment {
         waitpayAdapter = new WaitpayAdapter(getActivity(),waitpayList);
         waitpayAdapter.setWaitpayInterface(new WaitpayAdapter.WaitpayInterface() {
             @Override
-            public void cancelClick(int id) {
+            public void cancelClick(String strId) {
                 //取消订单
-                final int po = id;
+                final String po = strId;
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setMessage("确定取消此订单吗？");
                 builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -81,13 +83,15 @@ public class MainIndentFragment extends Fragment {
                         new Thread(){
                             @Override
                             public void run() {
+                                String string = "http://139.199.196.199/android/index.php/home/index/deleteord?id="+po;
                                 try {
-                                    URL url = new URL("http://139.199.196.199/android/index.php/home/index/deleteord?id="+po);
+                                    URL url = new URL(string);
                                     HttpURLConnection http = (HttpURLConnection) url.openConnection();
                                     http.setRequestMethod("GET");
                                     http.setConnectTimeout(5000);
                                     http.connect();
                                     if (http.getResponseCode()==HttpURLConnection.HTTP_OK){
+                                        Log.i("url------------->",string);
                                         handler.sendEmptyMessage(0);
                                     }
                                 } catch (MalformedURLException e) {
@@ -109,8 +113,12 @@ public class MainIndentFragment extends Fragment {
             }
 
             @Override
-            public void goPay(int id) {
+            public void goPay(String strId,int price) {
                 //去付款
+                Intent intent = new Intent(getActivity(), Payment.class);
+                intent.putExtra("id",strId+"");
+                intent.putExtra("price",price+"");
+                startActivity(intent);
             }
         });
         waitpayLiseView.setAdapter(waitpayAdapter);
@@ -191,42 +199,10 @@ public class MainIndentFragment extends Fragment {
         });
         return v;
     }
-    //获取所有订单
-    public void getAllIndent(){
-        String string = "http://139.199.196.199/android/index.php/home/index/getallord?tel=123456";
-        try {
-            URL url = new URL(string);
-            HttpURLConnection http = (HttpURLConnection) url.openConnection();
-            http.setRequestMethod("GET");
-            http.setConnectTimeout(5000);
-            http.connect();
-            if(http.getResponseCode()==HttpURLConnection.HTTP_OK){
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(http.getInputStream(),"utf-8"));
-                String s;
-                StringBuilder stringBuilder = new StringBuilder();
-                while ((s=bufferedReader.readLine())!=null){
-                    stringBuilder.append(s);
-                }
-                Log.e("全部订单-----",stringBuilder.toString());
-                JSONObject jsonObject = new JSONObject(stringBuilder.toString());
-                JSONArray jsonArray = jsonObject.optJSONArray("info");
-                for(int i=0;i<jsonArray.length();i++){
-                    JSONObject object = jsonArray.optJSONObject(i);
-
-                }
-            }
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
 
     //获取未付款订单数据
     public void getWaitpayData(){
-        String string = "http://139.199.196.199/android/index.php/home/index/hasnoprice?tel=123456";
+        String string = "http://139.199.196.199/android/index.php/home/index/nopayment?tel=123456";
         try {
             URL url = new URL(string);
             HttpURLConnection http = (HttpURLConnection) url.openConnection();
@@ -240,17 +216,18 @@ public class MainIndentFragment extends Fragment {
                 while ((s=bufferedReader.readLine())!=null){
                     stringBuilder.append(s);
                 }
-                Log.i("Data--------------->",stringBuilder.toString());
+//                Log.i("Data--------------->",stringBuilder.toString());
                 JSONObject jsonObject = new JSONObject(stringBuilder.toString());
                 JSONArray jsonArray = jsonObject.optJSONArray("info");
                 for(int i=0;i<jsonArray.length();i++){
                     JSONObject object = jsonArray.optJSONObject(i);
                     Waitpay waitpay = new Waitpay();
-                    waitpay.setId(object.optInt("id"));
+                    waitpay.setId(object.optString("id"));
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日HH时mm分");
                     waitpay.setTime(sdf.format(new BigDecimal(object.optString("time"))));
                     waitpay.setPlace(object.optString("address"));
-                    waitpay.setRange(object.optString(""));
+                    waitpay.setRange(types[object.optInt("type",1)-1]);
+                    waitpay.setPrice(object.optInt("price"));
                     waitpayList.add(waitpay);
                 }
                handler.sendEmptyMessage(0);
@@ -291,7 +268,7 @@ public class MainIndentFragment extends Fragment {
                     SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy年MM月dd日HH时mm分");
                     waitservice.setTimes(sdf1.format(new BigDecimal(object.optString("time"))));
                     waitservice.setCurrentPrice(object.optString("price","10元/小时"));
-                    waitservice.setOrginalPrice(object.optString("orginalprice","106元/小时"));
+                    waitservice.setOrginalPrice(object.optString("orginalprice","106"));
                     waitservice.setRanges(types[object.optInt("type",1)-1]);
                     waitserviceList.add(waitservice);
                 }

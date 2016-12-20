@@ -4,14 +4,23 @@ package com.micro.android316.housekeeping.model;
  * Created by Administrator on 2016/12/13.
  */
 public class Waitpay {
-    private int id;
+    private String id;
+    private int price;
     private String range,time,place;
 
-    public int getId() {
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

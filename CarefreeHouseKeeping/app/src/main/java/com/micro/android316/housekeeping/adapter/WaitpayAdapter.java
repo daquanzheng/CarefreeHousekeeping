@@ -32,8 +32,8 @@ public class WaitpayAdapter extends BaseAdapter {
     }
 
     public interface WaitpayInterface{
-        public void cancelClick(int id);
-        public void goPay(int id);
+        public void cancelClick(String strId);
+        public void goPay(String strId,int price);
     }
     public WaitpayAdapter(Context context,List<Waitpay> indentList){
         this.context = context;
@@ -74,17 +74,18 @@ public class WaitpayAdapter extends BaseAdapter {
         viewHolder.time.setText(waitpay.getTime());
         viewHolder.place.setText(waitpay.getPlace());
 
-        final int id = position;
+        final int price = waitpay.getPrice();
+        final String strId = waitpay.getId();
         viewHolder.cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                waitpayInterface.cancelClick(id);
+                waitpayInterface.cancelClick(strId);
             }
         });
         viewHolder.pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                waitpayInterface.goPay(id);
+                waitpayInterface.goPay(strId,price);
             }
         });
 
