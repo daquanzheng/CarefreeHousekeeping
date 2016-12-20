@@ -23,6 +23,23 @@ public class WaitserviceAdapter extends BaseAdapter{
     Context context;
     List<Waitservice> waitserviceList = new ArrayList<>();
     LayoutInflater inflater;
+
+    WaitserviceInterface waitserviceInterface;
+
+    public WaitserviceInterface getWaitserviceInterface() {
+        return waitserviceInterface;
+    }
+
+    public void setWaitserviceInterface(WaitserviceInterface waitserviceInterface) {
+        this.waitserviceInterface = waitserviceInterface;
+    }
+
+    public interface WaitserviceInterface{
+        public void reminderClick(int id);
+        public void editTimeClick(int id);
+        public void cancelAndRefund(int id);
+    }
+
     public WaitserviceAdapter(Context context,List<Waitservice> waitserviceList){
         this.context = context;
         this.waitserviceList = waitserviceList;
@@ -60,16 +77,36 @@ public class WaitserviceAdapter extends BaseAdapter{
             convertView.setTag(viewHolder);
         }
         viewHolder = (ViewHolder) convertView.getTag();
-//        Waitservice waitservice = waitserviceList.get(position);
-//        LoadImage.Load(viewHolder.picture,waitservice.getPicture(),context);
-//        viewHolder.range.setText(waitservice.getRanges());
-//        viewHolder.time.setText(waitservice.getTimes());
-//        viewHolder.currentPrice.setText(waitservice.getCurrentPrice());
-//        viewHolder.orginalPrice.setText(waitservice.getOrginalPrice());
+        Waitservice waitservice = waitserviceList.get(position);
+        LoadImage.Load(viewHolder.picture,waitservice.getPicture(),context);
+        viewHolder.range.setText(waitservice.getRanges());
+        viewHolder.time.setText(waitservice.getTimes());
+        viewHolder.currentPrice.setText(waitservice.getCurrentPrice());
+        viewHolder.orginalPrice.setText(waitservice.getOrginalPrice());
         //普通价格加中划线
         viewHolder.orginalPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         //设置抗锯齿，以免失真
         viewHolder.orginalPrice.getPaint().setAntiAlias(true);
+
+        final int id = position;
+        viewHolder.reminder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                waitserviceInterface.reminderClick(id);
+            }
+        });
+        viewHolder.editTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                waitserviceInterface.editTimeClick(id);
+            }
+        });
+        viewHolder.cancelIndent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                waitserviceInterface.cancelAndRefund(id);
+            }
+        });
         return convertView;
     }
     private class ViewHolder{

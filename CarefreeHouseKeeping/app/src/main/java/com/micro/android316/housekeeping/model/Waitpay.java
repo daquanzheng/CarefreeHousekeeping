@@ -4,7 +4,16 @@ package com.micro.android316.housekeeping.model;
  * Created by Administrator on 2016/12/13.
  */
 public class Waitpay {
-    String range,time,place;
+    private int id;
+    private String range,time,place;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getRange() {
         return range;

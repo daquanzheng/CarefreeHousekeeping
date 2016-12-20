@@ -67,6 +67,13 @@ public class HomePageFragment extends Fragment{
             }
         });
         listView.setAdapter(homePageAdapter);
+        lists.clear();
+        new Thread(){
+            @Override
+            public void run() {
+                getData();
+            }
+        }.start();
         return view;
     }
     Intent intent = new Intent();
@@ -96,13 +103,6 @@ public class HomePageFragment extends Fragment{
     @Override
     public void onResume() {
         super.onResume();
-        lists.clear();
-        new Thread(){
-            @Override
-            public void run() {
-                getData();
-            }
-        }.start();
     }
 
     String[] types = {"老人护理","婴幼儿护理","家居保洁","家具保洁","烹饪"};
