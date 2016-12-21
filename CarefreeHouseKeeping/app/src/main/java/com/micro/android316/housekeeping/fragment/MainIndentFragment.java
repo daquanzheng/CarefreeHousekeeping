@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -21,7 +22,9 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.micro.android316.housekeeping.R;
+import com.micro.android316.housekeeping.activity.Orderdetail;
 import com.micro.android316.housekeeping.activity.Payment;
+import com.micro.android316.housekeeping.activity.PersonalInformationActivity;
 import com.micro.android316.housekeeping.adapter.WaitpayAdapter;
 import com.micro.android316.housekeeping.adapter.WaitserviceAdapter;
 import com.micro.android316.housekeeping.model.Waitpay;
@@ -57,6 +60,7 @@ public class MainIndentFragment extends Fragment {
 
     LinearLayout all;
     View space;
+    Button submitAppraise;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -68,6 +72,14 @@ public class MainIndentFragment extends Fragment {
 
         space = v.findViewById(R.id.space);
         all = (LinearLayout) v.findViewById(R.id.all_indent);
+        submitAppraise = (Button) v.findViewById(R.id.submit_apprasise);
+        submitAppraise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(),"评论成功！",Toast.LENGTH_SHORT).show();
+                radioButtons[0].setChecked(true);
+            }
+        });
 
         waitpayAdapter = new WaitpayAdapter(getActivity(),waitpayList);
         waitpayAdapter.setWaitpayInterface(new WaitpayAdapter.WaitpayInterface() {
@@ -129,6 +141,8 @@ public class MainIndentFragment extends Fragment {
             @Override
             public void reminderClick(int id) {
                 //催单
+                Intent intent = new Intent(getActivity(), Orderdetail.class);
+                startActivity(intent);
             }
 
             @Override
