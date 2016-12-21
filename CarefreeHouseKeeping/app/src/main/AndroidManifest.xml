@@ -9,9 +9,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.SEND_SMS"/>
-    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
-    <uses-permission android:name="android.permission.READ_SMS"/>
 
     <application
         android:allowBackup="true"
@@ -19,11 +16,13 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.Login">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".activity.OnlineOnsultant"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+        <activity android:name=".activity.ToheaderActivity">
+            <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".activity.HomeMainActivity"/>
@@ -36,11 +35,6 @@
         <activity android:name=".activity.Payment"/>
         <activity android:name=".activity.NannyInformation"/>
         <activity android:name=".activity.OrderConfirm"/>
-        <activity android:name=".activity.RegisterActivity"></activity>
-        <activity android:name=".activity.PersonalInformationActivity"></activity>
-        <activity android:name=".activity.CommonAddressActivity"></activity>
-        <activity android:name=".activity.MessageActivity"></activity>
-        <activity android:name=".activity.SetActivity"></activity>
 
     </application>
 

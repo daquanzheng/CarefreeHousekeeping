@@ -31,6 +31,7 @@
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/count_down"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="剩余支付时间： 30:00"
@@ -50,6 +51,7 @@
         />
 
     <TextView
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="服务项目： 家居保洁"
@@ -60,6 +62,7 @@
         />
 
     <TextView
+        android:id="@+id/price1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="订单金额： ￥60.00"
@@ -70,6 +73,7 @@
         />
 
     <TextView
+        android:id="@+id/price2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="实付金额： ￥60.00"
@@ -131,6 +135,7 @@
             android:layout_height="1dp"
             />
         <CheckBox
+            android:id="@+id/wei_xin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:button="@drawable/zhifubox"
@@ -177,6 +182,7 @@
             android:layout_height="1dp"
             />
         <CheckBox
+            android:id="@+id/zi_fu_bao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:button="@drawable/zhifubox"
@@ -193,6 +199,7 @@
         />
 
     <Button
+        android:id="@+id/ti_jiao"
         android:layout_width="match_parent"
         android:layout_height="36dp"
         android:layout_marginLeft="10dp"

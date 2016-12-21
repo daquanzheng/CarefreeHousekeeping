@@ -80,18 +80,39 @@
         android:layout_height="2dp"
         android:background="@color/background_color"/>
     <!--装四个碎片-->
-    <ListView
-        android:id="@+id/waitpay_listview"
+    <!--<ListView-->
+        <!--android:id="@+id/allindent_listview"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:dividerHeight="15dp"-->
+        <!--android:divider="@color/background_color"/>-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/all_indent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:dividerHeight="15dp"
-        android:divider="@color/background_color" />
-    <ListView
-        android:id="@+id/waitservice_listview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:dividerHeight="15dp"
-        android:divider="@color/background_color"/>
+        android:orientation="vertical">
+            <ListView
+                android:id="@+id/waitpay_listview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:dividerHeight="15dp"
+                android:divider="@color/background_color" />
+        <View
+            android:id="@+id/space"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:background="@color/background_color"/>
+            <ListView
+                android:id="@+id/waitservice_listview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:dividerHeight="15dp"
+                android:divider="@color/background_color"/>
+    </LinearLayout>
+    </ScrollView>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
