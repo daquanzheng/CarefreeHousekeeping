@@ -27,7 +27,7 @@ public class CommonAddressActivity extends Activity{
 
     public List<Address> getData(){
         List<Address> addressList=new ArrayList<>();
-        for(int i=0;i<2;i++){
+        for(int i=0;i<4;i++){
             Address address=new Address();
             address.setName("蓝惠豪");
             address.setPhoneNumber("139****1523");

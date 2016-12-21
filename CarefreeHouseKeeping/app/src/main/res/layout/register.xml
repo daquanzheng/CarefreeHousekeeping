@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <com.micro.android316.housekeeping.utils.Topbar
-        android:id="@+id/topbar"
+        android:id="@+id/register_topbar"
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:background="@color/TopBarBg"
@@ -16,14 +16,18 @@
         android:layout_alignParentTop="true"
         android:padding="10dp">
     </com.micro.android316.housekeeping.utils.Topbar>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true">
     <EditText
+        android:id="@+id/register_phone_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="114dp"
         android:hint="手机号码"
         android:textSize="15sp"
         android:layout_marginLeft="20dp"
@@ -34,6 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
+            android:id="@+id/register_verification_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -43,6 +48,7 @@
             android:singleLine="true"
             android:layout_marginRight="20dp" />
         <TextView
+            android:id="@+id/register_get_verification_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="获取验证码"
@@ -53,26 +59,37 @@
             android:textColor="@color/text_blue"/>
     </FrameLayout>
     <EditText
+        android:id="@+id/register_login_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:hint="登录密码(6-16位数字字母组合密码)"
+        android:maxLines="1"
+        android:maxLength="16"
+        android:inputType="textPassword"
         android:layout_marginRight="20dp"
         android:textSize="15sp"/>
     <Button
+        android:id="@+id/register_btn"
         android:layout_width="match_parent"
         android:layout_height="36dp"
-        android:background="@drawable/register_btn"
+        android:background="@drawable/register_btn_grey"
+        android:clickable="false"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="45dp"
         android:text="立即注册"
         android:textColor="@color/white_text"
         android:textSize="12sp"/>
+        <CheckBox
+            android:id="@+id/register_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="注册表示同意隐私条款"
+            android:textSize="15sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:checked="true"/>
     </LinearLayout>
-    <CheckBox
-    android:id="@+id/checkbox"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="注册表示你同意条款" />
+    </RelativeLayout>
 </LinearLayout>

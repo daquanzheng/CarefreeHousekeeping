@@ -44,10 +44,19 @@ public class MessageAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder viewHolder=null;
         if(convertView==null){
             convertView=layoutInflater.inflate(R.layout.listview_item_message,null);
+            viewHolder=new ViewHolder(convertView);
+            convertView.setTag(viewHolder);
+        }else {
+            viewHolder= (ViewHolder) convertView.getTag();
         }
-
+        Message message=messageList.get(position);
+        viewHolder.Img.setTag(message.getImgUrl());
+        viewHolder.titleTv.setText(message.getTitle());
+        viewHolder.contentTv.setText(message.getContent());
+        viewHolder.timeTv.setText(message.getTime());
         return convertView;
     }
 
