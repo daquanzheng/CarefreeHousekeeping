@@ -35,6 +35,12 @@
         <activity android:name=".activity.Payment"/>
         <activity android:name=".activity.NannyInformation"/>
         <activity android:name=".activity.OrderConfirm"/>
+        <activity android:name=".activity.RegisterActivity"></activity>
+        <activity android:name=".activity.CommonAddressActivity"></activity>
+        <activity android:name=".activity.PersonalInformationActivity"></activity>
+        <activity android:name=".activity.Login"></activity>
+        <activity android:name=".activity.MessageActivity"></activity>
+        <activity android:name=".activity.SetActivity"></activity>
 
     </application>
 
