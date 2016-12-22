@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,17 +13,14 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
-import com.baidu.location.LocationClient;
-import com.baidu.location.LocationClientOption;
 import com.micro.android316.housekeeping.R;
+import com.micro.android316.housekeeping.activity.BaiduMapActivity;
 import com.micro.android316.housekeeping.activity.Category;
 import com.micro.android316.housekeeping.activity.NannyInformation;
 import com.micro.android316.housekeeping.adapter.HomePageAdapter;
 import com.micro.android316.housekeeping.model.HomePageModel;
-import com.micro.android316.housekeeping.utils.MyLocation;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,6 +46,7 @@ public class HomePageFragment extends Fragment{
     RelativeLayout goNurse;
     TextView clean,cooking;
     ImageView getLocation;
+    TextView city;
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -60,6 +57,7 @@ public class HomePageFragment extends Fragment{
         clean = (TextView) view1.findViewById(R.id.clean_text1);
         cooking = (TextView) view1.findViewById(R.id.cooking_text1);
         getLocation = (ImageView) view1.findViewById(R.id.get_position);
+        city = (TextView) view1.findViewById(R.id.city);
 
         goNurse.setOnClickListener(clickListener);
         clean.setOnClickListener(clickListener);
@@ -86,28 +84,13 @@ public class HomePageFragment extends Fragment{
         return view;
     }
     Intent intent = new Intent();
-    public LocationClient mLocationClient = null;
-    int kk=0;
     View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.get_position:
-                    kk++;
-                    MyLocation myLocation = new MyLocation(){
-                        @Override
-                        public void onReceiveLocation(BDLocation location) {
-                            super.onReceiveLocation(location);
-                        }
-                    };
-                    mLocationClient = new LocationClient(getActivity());
-                    mLocationClient.registerLocationListener(myLocation);
-                    initLocation();
-                    if(kk%2!=0){
-                        mLocationClient.start();
-                    }else {
-                        mLocationClient.stop();
-                    }
+                    intent.setClass(getActivity(), BaiduMapActivity.class);
+                    startActivityForResult(intent,112);
                     break;
                 case R.id.go_nurse:
                     intent.setClass(getActivity(), Category.class);
@@ -128,7 +111,24 @@ public class HomePageFragment extends Fragment{
         }
     };
 
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==112){
+            String s = data.getStringExtra("location");
+            int j = 0,k = 0;
+            for(int i=s.length()-1;i>=0;i--){
+                if(s.charAt(i)=='市'){
+                    k = i;
+                }else if(s.charAt(i)=='国'){
+                    j = i;
+                }
+            }
+            String ss = s.substring(j+1,k);
+            city.setText(ss);
+            Toast.makeText(getActivity(),"已定位到"+s,Toast.LENGTH_SHORT).show();
+        }
+    }
 
     @Override
     public void onResume() {
@@ -187,22 +187,4 @@ public class HomePageFragment extends Fragment{
             return true;
         }
     });
-
-    private void initLocation(){
-        LocationClientOption option = new LocationClientOption();
-        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy
-        );//可选，默认高精度，设置定位模式，高精度，低功耗，仅设备
-        option.setCoorType("bd09ll");//可选，默认gcj02，设置返回的定位结果坐标系
-        int span=1000;
-        option.setScanSpan(span);//可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的
-        option.setIsNeedAddress(true);//可选，设置是否需要地址信息，默认不需要
-        option.setOpenGps(true);//可选，默认false,设置是否使用gps
-        option.setLocationNotify(true);//可选，默认false，设置是否当GPS有效时按照1S/1次频率输出GPS结果
-        option.setIsNeedLocationDescribe(true);//可选，默认false，设置是否需要位置语义化结果，可以在BDLocation.getLocationDescribe里得到，结果类似于“在北京天安门附近”
-        option.setIsNeedLocationPoiList(true);//可选，默认false，设置是否需要POI结果，可以在BDLocation.getPoiList里得到
-        option.setIgnoreKillProcess(false);//可选，默认true，定位SDK内部是一个SERVICE，并放到了独立进程，设置是否在stop的时候杀死这个进程，默认不杀死
-        option.SetIgnoreCacheException(false);//可选，默认false，设置是否收集CRASH信息，默认收集
-        option.setEnableSimulateGps(false);//可选，默认false，设置是否需要过滤GPS仿真结果，默认需要
-        mLocationClient.setLocOption(option);
-    }
 }

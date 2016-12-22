@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -61,6 +62,7 @@ public class MainIndentFragment extends Fragment {
     LinearLayout all;
     View space;
     Button submitAppraise;
+    ImageView zan,cai;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -73,6 +75,34 @@ public class MainIndentFragment extends Fragment {
         space = v.findViewById(R.id.space);
         all = (LinearLayout) v.findViewById(R.id.all_indent);
         submitAppraise = (Button) v.findViewById(R.id.submit_apprasise);
+        zan = (ImageView) v.findViewById(R.id.zan);
+        cai = (ImageView) v.findViewById(R.id.cai);
+
+        final int[] a = {0};
+        zan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(a[0]==0) {
+                    Toast.makeText(getActivity(), "点赞成功！", Toast.LENGTH_SHORT).show();
+                    a[0]++;
+                }
+                else
+                    Toast.makeText(getActivity(),"你已经点过赞了！",Toast.LENGTH_SHORT).show();
+            }
+        });
+        final int[] b = {0};
+        cai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(b[0]==0){
+                    Toast.makeText(getActivity(),"踩踩踩，差评",Toast.LENGTH_SHORT).show();
+                    b[0]++;
+                }
+                else
+                    Toast.makeText(getActivity(),"你已经踩过了！",Toast.LENGTH_SHORT).show();
+            }
+        });
+
         submitAppraise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -238,7 +268,7 @@ public class MainIndentFragment extends Fragment {
                     Waitpay waitpay = new Waitpay();
                     waitpay.setId(object.optString("id"));
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日HH时mm分");
-                    waitpay.setTime(sdf.format(new BigDecimal(object.optString("time"))));
+                    waitpay.setTime(sdf.format(object.optLong("time")));
                     waitpay.setPlace(object.optString("address"));
                     waitpay.setRange(types[object.optInt("type",1)-1]);
                     waitpay.setPrice(object.optInt("price"));
@@ -280,7 +310,7 @@ public class MainIndentFragment extends Fragment {
                     Waitservice waitservice = new Waitservice();
                     waitservice.setPicture(object.optString("head"));
                     SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy年MM月dd日HH时mm分");
-                    waitservice.setTimes(sdf1.format(new BigDecimal(object.optString("time"))));
+                    waitservice.setTimes(sdf1.format(object.optLong("time")));
                     waitservice.setCurrentPrice(object.optString("price","10元/小时"));
                     waitservice.setOrginalPrice(object.optString("orginalprice","106"));
                     waitservice.setRanges(types[object.optInt("type",1)-1]);
