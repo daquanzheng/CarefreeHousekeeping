@@ -1,23 +1,47 @@
 package com.micro.android316.housekeeping.fragment;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.micro.android316.housekeeping.R;
+import com.micro.android316.housekeeping.activity.Orderdetail;
+import com.micro.android316.housekeeping.activity.Payment;
+import com.micro.android316.housekeeping.activity.PersonalInformationActivity;
 import com.micro.android316.housekeeping.adapter.WaitpayAdapter;
 import com.micro.android316.housekeeping.adapter.WaitserviceAdapter;
 import com.micro.android316.housekeeping.model.Waitpay;
 import com.micro.android316.housekeeping.model.Waitservice;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.math.BigDecimal;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +55,12 @@ public class MainIndentFragment extends Fragment {
     LinearLayout waitappraiseLayout;
     RadioGroup indentRadioGroup;
     RadioButton[] radioButtons = new RadioButton[4];
+    WaitpayAdapter waitpayAdapter;
+    WaitserviceAdapter waitserviceAdapter;
+
+    LinearLayout all;
+    View space;
+    Button submitAppraise;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -40,10 +70,91 @@ public class MainIndentFragment extends Fragment {
         waitserviceListView = (ListView) v.findViewById(R.id.waitservice_listview);
         waitappraiseLayout = (LinearLayout) v.findViewById(R.id.waitappraise_view);
 
-        WaitpayAdapter waitpayAdapter = new WaitpayAdapter(getActivity(),getWaitpayList());
+        space = v.findViewById(R.id.space);
+        all = (LinearLayout) v.findViewById(R.id.all_indent);
+        submitAppraise = (Button) v.findViewById(R.id.submit_apprasise);
+        submitAppraise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(),"评论成功！",Toast.LENGTH_SHORT).show();
+                radioButtons[0].setChecked(true);
+            }
+        });
+
+        waitpayAdapter = new WaitpayAdapter(getActivity(),waitpayList);
+        waitpayAdapter.setWaitpayInterface(new WaitpayAdapter.WaitpayInterface() {
+            @Override
+            public void cancelClick(String strId) {
+                //取消订单
+                final String po = strId;
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage("确定取消此订单吗？");
+                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        new Thread(){
+                            @Override
+                            public void run() {
+                                String string = "http://139.199.196.199/android/index.php/home/index/deleteord?id="+po;
+                                try {
+                                    URL url = new URL(string);
+                                    HttpURLConnection http = (HttpURLConnection) url.openConnection();
+                                    http.setRequestMethod("GET");
+                                    http.setConnectTimeout(5000);
+                                    http.connect();
+                                    if (http.getResponseCode()==HttpURLConnection.HTTP_OK){
+                                        Log.i("url------------->",string);
+                                        handler.sendEmptyMessage(0);
+                                    }
+                                } catch (MalformedURLException e) {
+                                    e.printStackTrace();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }.start();
+                    }
+                });
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.create().show();
+            }
+
+            @Override
+            public void goPay(String strId,int price) {
+                //去付款
+                Intent intent = new Intent(getActivity(), Payment.class);
+                intent.putExtra("id",strId+"");
+                intent.putExtra("price",price+"");
+                startActivity(intent);
+            }
+        });
         waitpayLiseView.setAdapter(waitpayAdapter);
 
-        WaitserviceAdapter waitserviceAdapter = new WaitserviceAdapter(getActivity(),getWaitserviceList());
+        waitserviceAdapter = new WaitserviceAdapter(getActivity(),waitserviceList);
+//        View v1 = LayoutInflater.from(getActivity()).inflate(R.layout.)
+        waitserviceAdapter.setWaitserviceInterface(new WaitserviceAdapter.WaitserviceInterface() {
+            @Override
+            public void reminderClick(int id) {
+                //催单
+                Intent intent = new Intent(getActivity(), Orderdetail.class);
+                startActivity(intent);
+            }
+
+            @Override
+            public void editTimeClick(int id) {
+                //修改时间
+            }
+
+            @Override
+            public void cancelAndRefund(int id) {
+                //取消并退款
+            }
+        });
         waitserviceListView.setAdapter(waitserviceAdapter);
 
         indentRadioGroup = (RadioGroup) v.findViewById(R.id.indent_radiogroup);
@@ -57,7 +168,9 @@ public class MainIndentFragment extends Fragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId){
                     case R.id.all:
+                        all.setVisibility(View.VISIBLE);
                         waitpayLiseView.setVisibility(View.VISIBLE);
+                        space.setVisibility(View.VISIBLE);
                         waitserviceListView.setVisibility(View.VISIBLE);
                         waitappraiseLayout.setVisibility(View.GONE);
                         radioButtons[0].setTextColor(getResources().getColor(R.color.txt_1));
@@ -66,7 +179,9 @@ public class MainIndentFragment extends Fragment {
                         radioButtons[3].setTextColor(getResources().getColor(R.color.dark_black));
                         break;
                     case R.id.waitpay:
+                        all.setVisibility(View.VISIBLE);
                         waitpayLiseView.setVisibility(View.VISIBLE);
+                        space.setVisibility(View.GONE);
                         waitserviceListView.setVisibility(View.GONE);
                         waitappraiseLayout.setVisibility(View.GONE);
                         radioButtons[0].setTextColor(getResources().getColor(R.color.dark_black));
@@ -75,7 +190,9 @@ public class MainIndentFragment extends Fragment {
                         radioButtons[3].setTextColor(getResources().getColor(R.color.dark_black));
                         break;
                     case R.id.waitservice:
+                        all.setVisibility(View.VISIBLE);
                         waitpayLiseView.setVisibility(View.GONE);
+                        space.setVisibility(View.GONE);
                         waitserviceListView.setVisibility(View.VISIBLE);
                         waitappraiseLayout.setVisibility(View.GONE);
                         radioButtons[0].setTextColor(getResources().getColor(R.color.dark_black));
@@ -84,8 +201,7 @@ public class MainIndentFragment extends Fragment {
                         radioButtons[3].setTextColor(getResources().getColor(R.color.dark_black));
                         break;
                     case R.id.waitappraise:
-                        waitpayLiseView.setVisibility(View.GONE);
-                        waitserviceListView.setVisibility(View.GONE);
+                        all.setVisibility(View.GONE);
                         waitappraiseLayout.setVisibility(View.VISIBLE);
                         radioButtons[0].setTextColor(getResources().getColor(R.color.dark_black));
                         radioButtons[1].setTextColor(getResources().getColor(R.color.dark_black));
@@ -98,18 +214,130 @@ public class MainIndentFragment extends Fragment {
         return v;
     }
 
-    private List<Waitpay> getWaitpayList() {
-        for(int i=0;i<3;i++){
-            Waitpay waitpay = new Waitpay();
-            waitpayList.add(waitpay);
+    //获取未付款订单数据
+    public void getWaitpayData(){
+        String string = "http://139.199.196.199/android/index.php/home/index/nopayment?tel=123456";
+        try {
+            URL url = new URL(string);
+            HttpURLConnection http = (HttpURLConnection) url.openConnection();
+            http.setRequestMethod("GET");
+            http.setConnectTimeout(5000);
+            http.connect();
+            if(http.getResponseCode()==200){
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(http.getInputStream(),"utf-8"));
+                String s;
+                StringBuilder stringBuilder = new StringBuilder();
+                while ((s=bufferedReader.readLine())!=null){
+                    stringBuilder.append(s);
+                }
+//                Log.i("Data--------------->",stringBuilder.toString());
+                JSONObject jsonObject = new JSONObject(stringBuilder.toString());
+                JSONArray jsonArray = jsonObject.optJSONArray("info");
+                for(int i=0;i<jsonArray.length();i++){
+                    JSONObject object = jsonArray.optJSONObject(i);
+                    Waitpay waitpay = new Waitpay();
+                    waitpay.setId(object.optString("id"));
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日HH时mm分");
+                    waitpay.setTime(sdf.format(new BigDecimal(object.optString("time"))));
+                    waitpay.setPlace(object.optString("address"));
+                    waitpay.setRange(types[object.optInt("type",1)-1]);
+                    waitpay.setPrice(object.optInt("price"));
+                    waitpayList.add(waitpay);
+                }
+               handler.sendEmptyMessage(0);
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        return waitpayList;
     }
-    private List<Waitservice> getWaitserviceList() {
-        for(int i=0;i<3;i++){
-            Waitservice waitservice = new Waitservice();
-            waitserviceList.add(waitservice);
+
+    String[] types = {"老人护理","婴幼儿护理","家居保洁","家具保洁","烹饪"};
+    //获取已付款待服务的订单
+    public void getWaitserviseData(){
+        String string = "http://139.199.196.199/android/index.php/home/index/payment?tel=123456";
+        try {
+            URL url = new URL(string);
+            HttpURLConnection http = (HttpURLConnection) url.openConnection();
+            http.setRequestMethod("GET");
+            http.setConnectTimeout(5000);
+            http.connect();
+            if(http.getResponseCode()==200){
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(http.getInputStream(),"utf-8"));
+                String s1;
+                StringBuilder stringBuilder1 = new StringBuilder();
+                while ((s1=bufferedReader.readLine())!=null){
+                    stringBuilder1.append(s1);
+                }
+                Log.i("data1------------->",stringBuilder1.toString());
+                JSONObject jsonObject = new JSONObject(stringBuilder1.toString());
+                JSONArray jsonArray = jsonObject.optJSONArray("info");
+                for(int i=0;i<jsonArray.length();i++){
+                    JSONObject object = jsonArray.optJSONObject(i);
+                    Waitservice waitservice = new Waitservice();
+                    waitservice.setPicture(object.optString("head"));
+                    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy年MM月dd日HH时mm分");
+                    waitservice.setTimes(sdf1.format(new BigDecimal(object.optString("time"))));
+                    waitservice.setCurrentPrice(object.optString("price","10元/小时"));
+                    waitservice.setOrginalPrice(object.optString("orginalprice","106"));
+                    waitservice.setRanges(types[object.optInt("type",1)-1]);
+                    waitserviceList.add(waitservice);
+                }
+                handler.sendEmptyMessage(0);
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        return waitserviceList;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        waitpayList.clear();
+        waitserviceList.clear();
+        new Thread(){
+            @Override
+            public void run() {
+                getWaitpayData();
+                getWaitserviseData();
+            }
+        }.start();
+    }
+
+    public void setListViewHeight(ListView listView){
+        BaseAdapter listAdapter = (BaseAdapter) listView.getAdapter();
+        if (listAdapter == null) {
+            return;
+        }
+        int totalHeight = 0;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight
+                + (listView.getDividerHeight() * (listAdapter.getCount()+1));
+        listView.setLayoutParams(params);
+    }
+
+
+    Handler handler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+//            Toast.makeText(getActivity(),"成功取消订单",Toast.LENGTH_SHORT).show();
+            setListViewHeight(waitpayLiseView);
+            setListViewHeight(waitserviceListView);
+            waitpayAdapter.notifyDataSetChanged();
+            waitserviceAdapter.notifyDataSetChanged();
+            return true;
+        }
+    });
 }

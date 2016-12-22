@@ -33,4 +33,5 @@
     <color name="text_blue">#1598ce</color>
     <color name="address_phone_number">#5A5A5A</color>
     <color name="address_text">#807D7D</color>
+    <color name="login_text">#bfbfbf</color>
 </resources>
