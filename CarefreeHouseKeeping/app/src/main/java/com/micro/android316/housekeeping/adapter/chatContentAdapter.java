@@ -14,7 +14,7 @@ import com.micro.android316.housekeeping.model.ChatContent;
 import java.util.List;
 
 /**
- * Created by Administrator on 2016/12/13.
+ * Created by Administrator on 2016/12/16.
  */
 public class ChatContentAdapter extends BaseAdapter {
     List<ChatContent> list;
@@ -55,3 +55,4 @@ public class ChatContentAdapter extends BaseAdapter {
         return convertView;
     }
 }
+
