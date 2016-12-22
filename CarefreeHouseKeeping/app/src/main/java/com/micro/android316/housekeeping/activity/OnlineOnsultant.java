@@ -38,7 +38,7 @@ public class OnlineOnsultant extends Activity {
     private TextView send;
     private ListView listView;
     private String strName="红豆",strContent,strHead="www.baidu.com";
-    private List<ChatContent>list=new ArrayList<>();
+    private List<ChatContent>list;
     private Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -61,6 +61,7 @@ public class OnlineOnsultant extends Activity {
                                     saveDate();
                                 }
                             }.start();
+                            chat.setText("");
                             break;
                         case R.id.img_online_back:
                             finish();
@@ -85,9 +86,9 @@ public class OnlineOnsultant extends Activity {
         sounds.setOnClickListener(onClickListener);
         send.setOnClickListener(onClickListener);
     }
-    //http://192.168.7.2/Picture/mall01.png
-    //http://192.168.7.2//index.php/Home/Index/chat?name=
+
     public void saveDate(){
+        list=new ArrayList<>();
         String httpURL="http://192.168.7.3//index.php/Home/Index/chat?name="+strName+"&content="+strContent+"&head="+strHead;
 
         try {
