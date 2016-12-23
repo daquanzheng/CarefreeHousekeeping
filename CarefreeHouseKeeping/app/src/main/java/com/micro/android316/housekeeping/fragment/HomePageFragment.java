@@ -6,15 +6,16 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.micro.android316.housekeeping.R;
+import com.micro.android316.housekeeping.activity.BaiduMapActivity;
 import com.micro.android316.housekeeping.activity.Category;
 import com.micro.android316.housekeeping.activity.NannyInformation;
 import com.micro.android316.housekeeping.adapter.HomePageAdapter;
@@ -43,6 +44,7 @@ public class HomePageFragment extends Fragment{
     HomePageAdapter homePageAdapter;
     RelativeLayout goNurse;
     TextView clean,cooking;
+    TextView city;
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -52,10 +54,12 @@ public class HomePageFragment extends Fragment{
         goNurse = (RelativeLayout) view1.findViewById(R.id.go_nurse);
         clean = (TextView) view1.findViewById(R.id.clean_text1);
         cooking = (TextView) view1.findViewById(R.id.cooking_text1);
+        city = (TextView) view1.findViewById(R.id.city);
 
         goNurse.setOnClickListener(clickListener);
         clean.setOnClickListener(clickListener);
         cooking.setOnClickListener(clickListener);
+        city.setOnClickListener(clickListener);
         listView.addHeaderView(view1);
         homePageAdapter = new HomePageAdapter(getActivity(),lists);
         homePageAdapter.setClickListener(new HomePageAdapter.ClickListener() {
@@ -81,6 +85,10 @@ public class HomePageFragment extends Fragment{
         @Override
         public void onClick(View v) {
             switch (v.getId()){
+                case R.id.city:
+                    intent.setClass(getActivity(), BaiduMapActivity.class);
+                    startActivityForResult(intent,112);
+                    break;
                 case R.id.go_nurse:
                     intent.setClass(getActivity(), Category.class);
                     intent.putExtra("location",1);
@@ -99,6 +107,26 @@ public class HomePageFragment extends Fragment{
             }
         }
     };
+
+    //定位之后回调，显示位置精确到市
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==112){
+            String s = data.getStringExtra("location");
+            int j = 0,k = 0;
+            for(int i=s.length()-1;i>=0;i--){
+                if(s.charAt(i)=='市'){
+                    k = i;
+                }else if(s.charAt(i)=='国'){
+                    j = i;
+                }
+            }
+            String ss = s.substring(j+1,k);
+            city.setText(ss);
+            Toast.makeText(getActivity(),"已定位到"+s,Toast.LENGTH_SHORT).show();
+        }
+    }
 
     @Override
     public void onResume() {

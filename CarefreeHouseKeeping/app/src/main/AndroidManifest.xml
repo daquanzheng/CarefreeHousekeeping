@@ -1,54 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.micro.android316.housekeeping">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 用于读取手机当前的状态-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!-- 写入扩展存储，向扩展卡写入数据，用于写入离线定位数据-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!-- SD卡读取权限，用户写入离线定位数据-->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <!-- 百度API所需权限 -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <uses-permission android:name="android.permission.READ_SMS" />
-    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!--对手机屏幕的适配-->
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/my_head"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.OnlineOnsultant"/>
+        <activity android:name=".activity.OnlineOnsultant" />
 
-        <activity android:name=".activity.HomeMainActivity">
+        <activity android:name=".activity.ToheaderActivity">
             <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--<activity android:name=".activity.HomeMainActivity"/>-->
-        <activity android:name=".activity.GuideActivity"/>
+        <activity android:name=".activity.HomeMainActivity" android:launchMode="singleTask"/>
+        <activity android:name=".activity.GuideActivity" />
 
-        <activity android:name=".activity.Appointment"/>
-        <activity android:name=".activity.Category">
-        </activity>
-        <activity android:name=".activity.Elderly"/>
-        <activity android:name=".activity.Payment"/>
-        <activity android:name=".activity.NannyInformation"/>
-        <activity android:name=".activity.OrderConfirm"/>
-        <activity android:name=".activity.Login"></activity>
+        <activity android:name=".activity.Appointment" />
+        <activity android:name=".activity.Category"></activity>
+        <activity android:name=".activity.Elderly" />
+        <activity android:name=".activity.Payment" />
+        <activity android:name=".activity.NannyInformation" />
+        <activity android:name=".activity.OrderConfirm" />
+        <activity android:name=".activity.RegisterActivity"></activity>
         <activity android:name=".activity.CommonAddressActivity"></activity>
         <activity android:name=".activity.PersonalInformationActivity"></activity>
+        <activity android:name=".activity.Login"></activity>
         <activity android:name=".activity.MessageActivity"></activity>
         <activity android:name=".activity.SetActivity"></activity>
+        <activity android:name=".activity.Orderdetail" />
 
-        <activity
-            android:name="com.mob.tools.MobUIShell"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
+        <activity android:name=".activity.BaiduMapActivity" />
+
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote"/>
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="Ek0bCwlGUPKTzqxrENIfExhITQMmNXCh" />
 
     </application>
 

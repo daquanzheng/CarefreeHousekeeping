@@ -41,7 +41,8 @@
             android:gravity="top"
             android:padding="10dp"
             android:textColorHint="#8a8a8a"
-            android:textSize="13sp"/>
+            android:textSize="13sp"
+            android:maxLength="500"/>
 
 
     </LinearLayout>
@@ -93,7 +94,9 @@
             android:hint="选填，便于我们联系您"
             android:textSize="14sp"
             android:textColor="#8a8a8a"
-            android:padding="10dp"/>
+            android:padding="10dp"
+            android:maxLength="11"
+            android:digits="0123456789"/>
     </LinearLayout>
     <TextView
         android:id="@+id/textview_feedback_commit"
