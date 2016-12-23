@@ -7,6 +7,7 @@ import android.widget.ListView;
 import com.micro.android316.housekeeping.R;
 import com.micro.android316.housekeeping.adapter.MessageAdapter;
 import com.micro.android316.housekeeping.model.Message;
+import com.micro.android316.housekeeping.utils.Topbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +17,24 @@ import java.util.List;
  */
 public class MessageActivity extends Activity{
     ListView listView;
+    Topbar messageTopbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.message);
         listView= (ListView) findViewById(R.id.listview_message);
+        messageTopbar= (Topbar) findViewById(R.id.message_topBar);
+        messageTopbar.setOnTopBarClickListener(new Topbar.topBarClickListener() {
+            @Override
+            public void leftClick() {
+                finish();
+            }
+
+            @Override
+            public void rightClick() {
+
+            }
+        });
         MessageAdapter messageAdapter=new MessageAdapter(this,getData());
         listView.setAdapter(messageAdapter);
     }

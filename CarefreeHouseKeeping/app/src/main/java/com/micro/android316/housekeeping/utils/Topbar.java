@@ -179,4 +179,9 @@ public class Topbar extends RelativeLayout{
         }
     }
 
+//    @Override
+//    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+//        int actualHeight=MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE>>2,MeasureSpec.AT_MOST);
+//        super.onMeasure(widthMeasureSpec,actualHeight);
+//    }
 }

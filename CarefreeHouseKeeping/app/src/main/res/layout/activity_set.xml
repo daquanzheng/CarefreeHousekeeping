@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <com.micro.android316.housekeeping.utils.Topbar
-        android:id="@+id/topbar"
+        android:id="@+id/set_topbar"
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:background="@color/TopBarBg"
