@@ -75,6 +75,13 @@ public class OnlineOnsultant extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_online_onsultant);
         init();
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                saveDate();
+            }
+        }.start();
     }
     public void init(){
         back=(ImageView)findViewById(R.id.img_online_back);
@@ -98,28 +105,28 @@ public class OnlineOnsultant extends Activity {
             httpURLConnection.setRequestMethod("GET");
             httpURLConnection.setConnectTimeout(5000);
             httpURLConnection.connect();
-            Log.i("getResponseCode=====",""+httpURLConnection.getResponseCode());
+            //Log.i("getResponseCode=====",""+httpURLConnection.getResponseCode());
             if(httpURLConnection.getResponseCode()==200){
                 BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream(),"utf-8"));
                 String str;
                 if((str=bufferedReader.readLine().toString())!=null){
                    stringBuilder.append(str);
                 }
-                Log.i("LENGTH=",""+stringBuilder.append(str));
+               // Log.i("LENGTH=",""+stringBuilder.append(str));
                 JSONObject jsonObject=new JSONObject(stringBuilder.toString());
                 if (jsonObject.getString("status").equals("1")){
                     JSONArray jsonArray=jsonObject.getJSONArray("result");
-                    Log.i("LENGTH=",""+jsonArray.length());
+                    //Log.i("LENGTH=",""+jsonArray.length());
                     for(int i=0;i<jsonArray.length();i++){
                         JSONObject object=jsonArray.getJSONObject(i);
                         ChatContent chatContent=new ChatContent();
                         chatContent.setChat(object.getString("content"));
-                        Log.i("content=",""+object.getString("content"));
+                        //Log.i("content=",""+object.getString("content"));
                         chatContent.setHead(R.mipmap.my_head);
                         chatContent.setName("红豆");
                         list.add(chatContent);
                     }
-                    Log.i("size=",""+list.size());
+                    //Log.i("size=",""+list.size());
                 }
                 handler.sendEmptyMessage(0);
             }
