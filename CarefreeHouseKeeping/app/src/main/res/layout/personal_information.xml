@@ -8,17 +8,17 @@
     <com.micro.android316.housekeeping.utils.Topbar
         android:id="@+id/personal_information_topBar"
         android:layout_width="match_parent"
-        android:layout_height="49dp"
+        android:layout_height="wrap_content"
         android:background="@color/TopBarBg"
         custom:leftImg="@mipmap/top_back"
         custom:rightText="保存"
         custom:rightTextColor="@color/white_text"
-        custom:rightTextSize="8sp"
+        custom:rightTextSize="5sp"
         custom:title="个人信息"
         custom:titleTextColor="@color/white_text"
-        custom:titleTextSize="12sp"
+        custom:titleTextSize="6sp"
         android:layout_alignParentTop="true"
-        android:padding="10dp">
+        android:padding="5dp">
     </com.micro.android316.housekeeping.utils.Topbar>
     <RelativeLayout
         android:layout_width="match_parent"

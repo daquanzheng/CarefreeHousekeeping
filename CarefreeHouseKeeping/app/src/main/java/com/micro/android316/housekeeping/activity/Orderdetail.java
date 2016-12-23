@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +22,9 @@ import java.net.URL;
  * Created by Administrator on 2016/12/12.
  */
 public class Orderdetail extends Activity {
-    private TextView delete,onlinePerson;
+    private TextView delete,onlinePerson,type,numtime,price,money,moneyInfact,serviceTime,serviceAddress,orderNum;
+    private ImageView back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,9 +34,19 @@ public class Orderdetail extends Activity {
     public void init(){
         delete=(TextView)findViewById(R.id.textview_delete_order);
         onlinePerson=(TextView)findViewById(R.id.textview_online_person);
+        back=(ImageView)findViewById(R.id.img_orderdetail_back);
+        type=(TextView)findViewById(R.id.textview_od_type);
+        numtime=(TextView)findViewById(R.id.textview_od_numtime);
+        price=(TextView)findViewById(R.id.textview_od_price);
+        money=(TextView)findViewById(R.id.textview_od_money);
+        moneyInfact=(TextView)findViewById(R.id.textview_od_moneyinfact);
+        serviceTime=(TextView)findViewById(R.id.textview_od_servicetime);
+        serviceAddress=(TextView)findViewById(R.id.textview_od_serviecaddress);
+        orderNum=(TextView)findViewById(R.id.textview_od_ordernum);
 
         delete.setOnClickListener(onClickListener);
         onlinePerson.setOnClickListener(onClickListener);
+        back.setOnClickListener(onClickListener);
     }
     View.OnClickListener onClickListener=new View.OnClickListener() {
         @Override
@@ -45,6 +58,9 @@ public class Orderdetail extends Activity {
                 case R.id.textview_online_person:
                     Intent intent=new Intent(Orderdetail.this,OnlineOnsultant.class);
                     startActivity(intent);
+                    break;
+                case R.id.img_orderdetail_back:
+                    finish();
                     break;
 
             }
