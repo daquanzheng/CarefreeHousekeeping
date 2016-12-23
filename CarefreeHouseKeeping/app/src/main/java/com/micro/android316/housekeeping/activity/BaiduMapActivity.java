@@ -81,6 +81,7 @@ public class BaiduMapActivity extends Activity {
         myButton = (Button) findViewById(R.id.location_button);
         myTextView = (TextView) findViewById(R.id.location_text);
 
+        //点击获取到我的定位
         myButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -152,6 +153,7 @@ public class BaiduMapActivity extends Activity {
         super.onDestroy();
         mMapView.onDestroy();
     }
+    //将定位到的位置回调
     @Override
     public void finish() {
         Intent intent = getIntent();

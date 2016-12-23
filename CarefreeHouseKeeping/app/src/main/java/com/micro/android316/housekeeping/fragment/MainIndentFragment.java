@@ -117,41 +117,43 @@ public class MainIndentFragment extends Fragment {
             public void cancelClick(String strId) {
                 //取消订单
                 final String po = strId;
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setMessage("确定取消此订单吗？");
-                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        new Thread(){
-                            @Override
-                            public void run() {
-                                String string = "http://139.199.196.199/android/index.php/home/index/deleteord?id="+po;
-                                try {
-                                    URL url = new URL(string);
-                                    HttpURLConnection http = (HttpURLConnection) url.openConnection();
-                                    http.setRequestMethod("GET");
-                                    http.setConnectTimeout(5000);
-                                    http.connect();
-                                    if (http.getResponseCode()==HttpURLConnection.HTTP_OK){
-                                        Log.i("url------------->",string);
-                                        handler.sendEmptyMessage(0);
-                                    }
-                                } catch (MalformedURLException e) {
-                                    e.printStackTrace();
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }.start();
-                    }
-                });
-                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                builder.create().show();
+                Intent intent = new Intent(getActivity(),Orderdetail.class);
+                startActivity(intent);
+//                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//                builder.setMessage("确定取消此订单吗？");
+//                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        new Thread(){
+//                            @Override
+//                            public void run() {
+//                                String string = "http://139.199.196.199/android/index.php/home/index/deleteord?id="+po;
+//                                try {
+//                                    URL url = new URL(string);
+//                                    HttpURLConnection http = (HttpURLConnection) url.openConnection();
+//                                    http.setRequestMethod("GET");
+//                                    http.setConnectTimeout(5000);
+//                                    http.connect();
+//                                    if (http.getResponseCode()==HttpURLConnection.HTTP_OK){
+//                                        Log.i("url------------->",string);
+//                                        handler.sendEmptyMessage(0);
+//                                    }
+//                                } catch (MalformedURLException e) {
+//                                    e.printStackTrace();
+//                                } catch (IOException e) {
+//                                    e.printStackTrace();
+//                                }
+//                            }
+//                        }.start();
+//                    }
+//                });
+//                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dialog.dismiss();
+//                    }
+//                });
+//                builder.create().show();
             }
 
             @Override

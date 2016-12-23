@@ -49,86 +49,106 @@
             android:layout_height="122dp"
             android:layout_margin="10dp"
             android:orientation="horizontal">
-            <RelativeLayout
-                android:id="@+id/go_nurse"
-                android:layout_width="197dp"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/home_class_nurse"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/nurse"
-                    android:textColor="@color/main_color"
-                    android:padding="4dp"
-                    android:gravity="center"
-                    android:layout_alignParentBottom="true"
-                    android:background="@color/background_color"
-                    android:alpha="0.7"/>
-            </RelativeLayout>
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
                 <RelativeLayout
+                    android:id="@+id/go_nurse"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp">
+                    android:layout_height="match_parent">
                     <ImageView
-                        android:id="@+id/clean"
-                        android:layout_width="70dp"
-                        android:layout_height="58dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/home_class_nurse"
+                        android:scaleType="fitXY"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/nurse"
+                        android:textColor="@color/main_color"
+                        android:padding="4dp"
+                        android:gravity="center"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/background_color"
+                        android:alpha="0.7"/>
+                </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/clean_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="match_parent"
                         android:src="@mipmap/home_class_pc_clean"
                         android:scaleType="centerCrop"/>
-                    <ImageView
-                        android:id="@+id/cooking"
-                        android:layout_width="70dp"
-                        android:layout_height="59dp"
-                        android:src="@mipmap/home_class_pc_cooking"
-                        android:layout_below="@id/clean"
-                        android:layout_marginTop="5dp"/>
-                    <TextView
-                        android:id="@+id/clean_text1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/clean"
-                        android:textSize="16sp"
-                        android:textColor="@color/main_color"
-                        android:layout_toRightOf="@id/clean"
-                        android:layout_marginTop="7dp"
-                        android:layout_marginLeft="5dp"/>
-                    <TextView
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="3"
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/clean"
+                            android:textSize="16sp"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/main_color" />
+                        <TextView
                         android:id="@+id/clean_text2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/make_environment"
                         android:textSize="11sp"
-                        android:layout_marginTop="3dp"
-                        android:layout_toRightOf="@id/clean"
-                        android:layout_below="@id/clean_text1"
-                        android:layout_alignLeft="@id/clean_text1"/>
-                    <TextView
-                        android:id="@+id/cooking_text1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/cooking"
-                        android:textSize="16sp"
-                        android:textColor="@color/main_color"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_toRightOf="@id/cooking"
-                        android:layout_alignTop="@id/cooking"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/easy_enjoy_food"
-                        android:textSize="11sp"
-                        android:layout_marginTop="3dp"
-                        android:layout_below="@id/cooking_text1"
-                        android:layout_alignLeft="@id/cooking_text1"/>
-                </RelativeLayout>
+                        android:layout_marginTop="3dp" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/cook_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+                    <ImageView
+                    android:id="@+id/cooking"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/home_class_pc_cooking" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="3"
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/cooking"
+                            android:textSize="16sp"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/main_color" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/easy_enjoy_food"
+                            android:textSize="11sp"
+                            android:layout_marginTop="3dp" />
+                    </LinearLayout>
+
+            </LinearLayout>
             </LinearLayout>
         </LinearLayout>
         <TextView

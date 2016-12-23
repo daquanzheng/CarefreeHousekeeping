@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -43,7 +44,7 @@ public class HomePageFragment extends Fragment{
     ListView listView;
     HomePageAdapter homePageAdapter;
     RelativeLayout goNurse;
-    TextView clean,cooking;
+    LinearLayout clean,cooking;
     TextView city;
     @Nullable
     @Override
@@ -52,8 +53,8 @@ public class HomePageFragment extends Fragment{
         listView = (ListView) view.findViewById(R.id.home_listview);
         View view1 = LayoutInflater.from(getActivity()).inflate(R.layout.homepage_header,null);
         goNurse = (RelativeLayout) view1.findViewById(R.id.go_nurse);
-        clean = (TextView) view1.findViewById(R.id.clean_text1);
-        cooking = (TextView) view1.findViewById(R.id.cooking_text1);
+        clean = (LinearLayout) view1.findViewById(R.id.clean_layout);
+        cooking = (LinearLayout) view1.findViewById(R.id.cook_layout);
         city = (TextView) view1.findViewById(R.id.city);
 
         goNurse.setOnClickListener(clickListener);
@@ -94,12 +95,12 @@ public class HomePageFragment extends Fragment{
                     intent.putExtra("location",1);
                     startActivity(intent);
                     break;
-                case R.id.clean_text1:
+                case R.id.clean_layout:
                     intent.setClass(getActivity(), Category.class);
                     intent.putExtra("location",2);
                     startActivity(intent);
                     break;
-                case R.id.cooking_text1:
+                case R.id.cook_layout:
                     intent.setClass(getActivity(), Category.class);
                     intent.putExtra("location",3);
                     startActivity(intent);
