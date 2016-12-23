@@ -8,19 +8,16 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:background="@color/black">
-        <ImageView
-            android:id="@+id/get_position"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/home_position"
-            android:padding="7dp"/>
         <TextView
             android:id="@+id/city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="@string/chongqing"
-            android:textColor="@color/white"/>
+            android:text="我的位置"
+            android:textColor="@color/white"
+            android:drawableLeft="@mipmap/home_position"
+            android:drawablePadding="5dp"
+            android:layout_marginLeft="5dp"/>
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -97,7 +94,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/clean"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         android:textColor="@color/main_color"
                         android:layout_toRightOf="@id/clean"
                         android:layout_marginTop="7dp"
@@ -107,7 +104,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/make_environment"
-                        android:textSize="12sp"
+                        android:textSize="11sp"
                         android:layout_marginTop="3dp"
                         android:layout_toRightOf="@id/clean"
                         android:layout_below="@id/clean_text1"
@@ -117,7 +114,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/cooking"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         android:textColor="@color/main_color"
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="7dp"
@@ -127,7 +124,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/easy_enjoy_food"
-                        android:textSize="12sp"
+                        android:textSize="11sp"
                         android:layout_marginTop="3dp"
                         android:layout_below="@id/cooking_text1"
                         android:layout_alignLeft="@id/cooking_text1"/>

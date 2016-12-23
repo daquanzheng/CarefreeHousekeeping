@@ -53,7 +53,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.HomeMainActivity" />
+        <activity android:name=".activity.HomeMainActivity" android:launchMode="singleTask"/>
         <activity android:name=".activity.GuideActivity" />
 
         <activity android:name=".activity.Appointment" />

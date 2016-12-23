@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -45,7 +44,6 @@ public class HomePageFragment extends Fragment{
     HomePageAdapter homePageAdapter;
     RelativeLayout goNurse;
     TextView clean,cooking;
-    ImageView getLocation;
     TextView city;
     @Nullable
     @Override
@@ -56,13 +54,12 @@ public class HomePageFragment extends Fragment{
         goNurse = (RelativeLayout) view1.findViewById(R.id.go_nurse);
         clean = (TextView) view1.findViewById(R.id.clean_text1);
         cooking = (TextView) view1.findViewById(R.id.cooking_text1);
-        getLocation = (ImageView) view1.findViewById(R.id.get_position);
         city = (TextView) view1.findViewById(R.id.city);
 
         goNurse.setOnClickListener(clickListener);
         clean.setOnClickListener(clickListener);
         cooking.setOnClickListener(clickListener);
-        getLocation.setOnClickListener(clickListener);
+        city.setOnClickListener(clickListener);
         listView.addHeaderView(view1);
         homePageAdapter = new HomePageAdapter(getActivity(),lists);
         homePageAdapter.setClickListener(new HomePageAdapter.ClickListener() {
@@ -88,7 +85,7 @@ public class HomePageFragment extends Fragment{
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-                case R.id.get_position:
+                case R.id.city:
                     intent.setClass(getActivity(), BaiduMapActivity.class);
                     startActivityForResult(intent,112);
                     break;
@@ -111,6 +108,7 @@ public class HomePageFragment extends Fragment{
         }
     };
 
+    //定位之后回调，显示位置精确到市
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
