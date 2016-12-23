@@ -5,15 +5,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <com.micro.android316.housekeeping.utils.Topbar
-        android:id="@+id/topbar"
+        android:id="@+id/mine_topbar"
         android:layout_width="match_parent"
-        android:layout_height="49dp"
+        android:layout_height="wrap_content"
         android:background="@color/TopBarBg"
         custom:title="我的"
         custom:titleTextColor="@color/white_text"
-        custom:titleTextSize="12sp"
+        custom:titleTextSize="8sp"
         android:layout_alignParentTop="true"
-        android:padding="10dp">
+        android:padding="5dp">
     </com.micro.android316.housekeeping.utils.Topbar>
     <RelativeLayout
         android:layout_width="match_parent"

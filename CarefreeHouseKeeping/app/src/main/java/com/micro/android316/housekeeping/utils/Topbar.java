@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,6 +72,7 @@ public class Topbar extends RelativeLayout{
         leftImg=ta.getDrawable(R.styleable.Topbar_leftImg);
 
         titleTextSize=ta.getDimension(R.styleable.Topbar_titleTextSize,0);
+        Log.i("titleSize", "Topbar: "+titleTextSize);
         titleTextColor=ta.getColor(R.styleable.Topbar_titleTextColor,0);
         title=ta.getString(R.styleable.Topbar_title);
 
@@ -89,8 +91,7 @@ public class Topbar extends RelativeLayout{
         rightTv.setTextColor(rightTextColor);
         rightTv.setTextSize(rightTextSize);
         rightTv.setText(rightText);
-        rightTv.setMaxWidth(70);
-
+        rightTv.setMaxWidth(50);
         if (leftImg!= null) {
             leftImgView.setImageDrawable(leftImg);
             leftImgView.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -128,7 +129,7 @@ public class Topbar extends RelativeLayout{
 
         addView(rightTv,rightParams);
 
-        titleParams=new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        titleParams=new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         titleParams.addRule(RelativeLayout.CENTER_IN_PARENT,TRUE);
 
 
@@ -181,7 +182,12 @@ public class Topbar extends RelativeLayout{
 
 //    @Override
 //    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-//        int actualHeight=MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE>>2,MeasureSpec.AT_MOST);
-//        super.onMeasure(widthMeasureSpec,actualHeight);
+////        int actualHeight=MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE>>2,MeasureSpec.AT_MOST);
+//        super.onMeasure(widthMeasureSpec,heightMeasureSpec);
 //    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
 }

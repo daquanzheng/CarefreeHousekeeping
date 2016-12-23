@@ -7,17 +7,17 @@
     <com.micro.android316.housekeeping.utils.Topbar
         android:id="@+id/address_topbar"
         android:layout_width="match_parent"
-        android:layout_height="49dp"
+        android:layout_height="wrap_content"
         android:background="@color/white_text"
         custom:leftImg="@mipmap/address_arrow"
         custom:rightTextColor="@color/text_blue"
         custom:rightText="新增地址"
-        custom:rightTextSize="6sp"
+        custom:rightTextSize="4sp"
         custom:title="常用地址"
         custom:titleTextColor="#424141"
-        custom:titleTextSize="12sp"
+        custom:titleTextSize="6sp"
         android:layout_alignParentTop="true"
-        android:padding="10dp">
+        android:padding="5dp">
     </com.micro.android316.housekeeping.utils.Topbar>
     <View
         android:layout_width="match_parent"
