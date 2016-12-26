@@ -32,7 +32,7 @@ public class BaiduMapActivity extends Activity {
     private MyLocationListener mLocationListener;
 
     private double mLatitude,mLongitude;
-    String str;
+    String str1,str2;
 
 
     //地图视图
@@ -59,7 +59,8 @@ public class BaiduMapActivity extends Activity {
                 MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(latLng);
                 mBaiduMap.animateMapStatus(msu);
                 Toast.makeText(BaiduMapActivity.this,bdLocation.getAddrStr(),Toast.LENGTH_SHORT).show();
-                str = bdLocation.getAddrStr();
+                str1 = bdLocation.getAddrStr();
+                str2 = bdLocation.getProvince()+bdLocation.getCity();
                 isFirstIn = false;
             }
         }
@@ -88,7 +89,7 @@ public class BaiduMapActivity extends Activity {
                 LatLng latLng = new LatLng(mLatitude,mLongitude);
                 MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(latLng);
                 mBaiduMap.animateMapStatus(msu);
-                myTextView.setText(str);
+                myTextView.setText(str1);
             }
         });
     }
@@ -157,7 +158,7 @@ public class BaiduMapActivity extends Activity {
     @Override
     public void finish() {
         Intent intent = getIntent();
-        intent.putExtra("location",str);
+        intent.putExtra("location",str2);
         setResult(112,intent);
         super.finish();
     }

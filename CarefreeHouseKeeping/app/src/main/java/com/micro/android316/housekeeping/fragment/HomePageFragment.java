@@ -115,16 +115,7 @@ public class HomePageFragment extends Fragment{
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==112){
             String s = data.getStringExtra("location");
-            int j = 0,k = 0;
-            for(int i=s.length()-1;i>=0;i--){
-                if(s.charAt(i)=='市'){
-                    k = i;
-                }else if(s.charAt(i)=='国'){
-                    j = i;
-                }
-            }
-            String ss = s.substring(j+1,k);
-            city.setText(ss);
+            city.setText(s);
             Toast.makeText(getActivity(),"已定位到"+s,Toast.LENGTH_SHORT).show();
         }
     }
