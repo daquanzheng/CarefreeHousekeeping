@@ -76,7 +76,7 @@ public class Orderdetail extends Activity {
                         new Thread(){
                             @Override
                             public void run() {
-                                String string = "http://139.199.196.199/android/index.php/home/index/deleteord?id=";
+                                String string = "http://139.199.196.199/android/index.php/home/index/deleteord?id="+"15123073170";
                                 try {
                                     URL url = new URL(string);
                                     HttpURLConnection http = (HttpURLConnection) url.openConnection();
